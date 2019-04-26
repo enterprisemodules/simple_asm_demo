@@ -4,26 +4,66 @@ pe-asmmaster:
   cpucount:         2
   ram:              3072
   type:             pe-master
+  box:              enterprisemodules/centos-7.3-x86_64-nocm'
+  # The installer needs to be unpacked in the ./modules/software/files/
+  required_plugins:
+    - vagrant-triggers
+  additional_hosts: |
+    127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+    192.168.254.10 asmmaster.example.com puppet master
+
 ml-asm112:
   public_ip:        '192.168.254.112'
   cpucount:         1
   type:             masterless
-  virtualboxorafix: enable
+  virtualboxorafix: true
   box:              enterprisemodules/ol-7.3-x86_64-nocm
+  # The installer needs to be unpacked in the ./modules/software/files/
+  puppet_installer: puppet-enterprise-2018.1.1-el-7-x86_64/puppet-enterprise-installer
+  required_plugins:
+    - vagrant-triggers
+  additional_hosts: |
+    127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+    192.168.254.10 asmmaster.example.com puppet master
+  software_files:
+    - p13390677_112040_Linux-x86-64_1of7.zip
+    - p13390677_112040_Linux-x86-64_2of7.zip
+
 ml-asm121:
   public_ip:        '192.168.254.121'
   cpucount:         1
   type:             masterless
-  virtualboxorafix: enable
+  virtualboxorafix: true
   box:              enterprisemodules/ol-7.3-x86_64-nocm
+  required_plugins:
+    - vagrant-triggers
+  # The installer needs to be unpacked in the ./modules/software/files/
+  puppet_installer: puppet-enterprise-2018.1.1-el-7-x86_64/puppet-enterprise-installer
+  additional_hosts: |
+    127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+    192.168.254.10 asmmaster.example.com puppet master
+  software_files:
+    - linuxamd64_12102_database_1of2.zip
+    - linuxamd64_12102_database_2of2.zip
+
 ml-asm122:
   public_ip:        '192.168.254.122'
   cpucount:         2
   ram:              8192
   type:             masterless
-  virtualboxorafix: enable
+  virtualboxorafix: true
+  needs_storage:    true
+  required_plugins:
+    - vagrant-triggers
   box:              enterprisemodules/ol-7.3-x86_64-nocm
-  needs_storage:    enabled
+  # The installer needs to be unpacked in the ./modules/software/files/
+  puppet_installer: puppet-enterprise-2018.1.1-el-7-x86_64/puppet-enterprise-installer
+  additional_hosts: |
+    127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+    192.168.254.10 asmmaster.example.com puppet master
+  software_files:
+    - LINUX.X64_180000_db_home.zip
+    - p6880880_121010_Linux-x86-64.zip
   disks:
     data01:
       size: 8192
@@ -40,35 +80,88 @@ ml-asm122:
     reco02:
       size: 8192
       uuid: '5'
+
 ml-asm180:
   public_ip:        '192.168.254.180'
   cpucount:         1
   ram:              8667
   type:             masterless
-  virtualboxorafix: enable
+  virtualboxorafix: true
+  required_plugins:
+    - vagrant-triggers
   box:              enterprisemodules/ol-7.3-x86_64-nocm
+  # The installer needs to be unpacked in the ./modules/software/files/
+  puppet_installer: puppet-enterprise-2018.1.1-el-7-x86_64/puppet-enterprise-installer
+  additional_hosts: |
+    127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+    192.168.254.10 asmmaster.example.com puppet master
+  software_files:
+    - LINUX.X64_180000_db_home.zip
+
 pe-asm112:
   public_ip:        '192.168.254.112'
   cpucount:         1
   type:             pe-agent
-  virtualboxorafix: enable
+  virtualboxorafix: true
+  required_plugins:
+    - vagrant-triggers
   box:              enterprisemodules/centos-7.5-x86_64-nocm
+  # The installer needs to be unpacked in the ./modules/software/files/
+  puppet_installer: puppet-enterprise-2018.1.1-el-7-x86_64/puppet-enterprise-installer
+  additional_hosts: |
+    127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+    192.168.254.10 asmmaster.example.com puppet master
+  software_files:
+    - p13390677_112040_Linux-x86-64_1of7.zip
+    - p13390677_112040_Linux-x86-64_2of7.zip
+
 pe-asm121:
   public_ip:        '192.168.254.121'
   cpucount:         1
   type:             pe-agent
-  virtualboxorafix: enable
+  virtualboxorafix: true
+  required_plugins:
+    - vagrant-triggers
   box:              enterprisemodules/centos-7.5-x86_64-nocm
+  # The installer needs to be unpacked in the ./modules/software/files/
+  puppet_installer: puppet-enterprise-2018.1.1-el-7-x86_64/puppet-enterprise-installer
+  additional_hosts: |
+    127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+    192.168.254.10 asmmaster.example.com puppet master
+  software_files:
+    - linuxamd64_12102_database_1of2.zip
+    - linuxamd64_12102_database_2of2.zip
+
 pe-asm122:
   public_ip:        '192.168.254.122'
   cpucount:         1
   type:             pe-agent
-  virtualboxorafix: enable
+  virtualboxorafix: true
+  required_plugins:
+    - vagrant-triggers
   box:              enterprisemodules/centos-7.5-x86_64-nocm
+  # The installer needs to be unpacked in the ./modules/software/files/
+  puppet_installer: puppet-enterprise-2018.1.1-el-7-x86_64/puppet-enterprise-installer
+  additional_hosts: |
+    127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+    192.168.254.10 asmmaster.example.com puppet master
+  software_files:
+    - LINUX.X64_180000_db_home.zip
+    - p6880880_121010_Linux-x86-64.zip
+
 pe-asm180:
   public_ip:        '192.168.254.180'
   cpucount:         1
   ram:              8667
   type:             pe-agent
-  virtualboxorafix: enable
+  virtualboxorafix: true
+  required_plugins:
+    - vagrant-triggers
   box:              enterprisemodules/ol-7.3-x86_64-nocm
+  # The installer needs to be unpacked in the ./modules/software/files/
+  puppet_installer: puppet-enterprise-2018.1.1-el-7-x86_64/puppet-enterprise-installer
+  additional_hosts: |
+    127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+    192.168.254.10 asmmaster.example.com puppet master
+  software_files:
+    - LINUX.X64_180000_db_home.zip
