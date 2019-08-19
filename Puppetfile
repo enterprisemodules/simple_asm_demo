@@ -2,30 +2,30 @@
 forge 'http://forge.enterprisemodules.com'
 
 
-mod 'puppetlabs-stdlib',                    '4.25.1'
-mod 'puppetlabs-concat',                    '4.2.1'
-mod 'stm-debconf',                          '2.0.0'
-mod 'saz-limits',                           '3.0.2'
-mod 'petems-swap_file',                     '1.0.1'
-mod 'puppet-archive',                       '2.0.0'
-mod 'saz-timezone',                         '4.1.1'
-mod 'ipcrm-echo',                           '0.1.5'
-mod 'herculesteam-augeasproviders_core',    '2.1.4'
-mod 'herculesteam-augeasproviders_sysctl',  '2.2.0'
+mod 'puppetlabs-stdlib'
+mod 'puppetlabs-concat'
+mod 'stm-debconf'
+mod 'saz-limits'
+mod 'petems-swap_file'
+mod 'puppet-archive'
+mod 'saz-timezone'
+mod 'ipcrm-echo'
+mod 'herculesteam-augeasproviders_core'
+mod 'herculesteam-augeasproviders_sysctl'
 mod 'puppetlabs-firewall'
 mod 'crayfishx-firewalld'
 
 # Added for ASM
-mod 'derdanne-nfs',                         '2.0.8'
+mod 'derdanne-nfs'
 
 #
 # The Enterprise Modules Oracle specific Modules
 #
-mod 'enterprisemodules-ora_config',         '3.6.0'
-mod 'enterprisemodules-easy_type',          '2.9.8'
-mod 'enterprisemodules-ora_install',        '4.5.0'
-mod 'enterprisemodules-ora_profile',        '0.9.0'
-mod 'enterprisemodules-ora_cis',            '2.1.0'
+mod 'enterprisemodules-ora_config'
+mod 'enterprisemodules-easy_type'
+mod 'enterprisemodules-ora_install'
+mod 'enterprisemodules-ora_profile'
+mod 'enterprisemodules-ora_cis'
 #
 # Modules that are part of the control repo. R10K doesn't need to touch these
 #

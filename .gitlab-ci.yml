@@ -1,0 +1,62 @@
+---
+#
+# Include the shared gitlab CI definitions
+#
+include:
+  - project: 'enterprisemodules/gitlab_ci'
+    file: 'gitlab-ci.yml'
+
+# asm190_demo_check:
+#   extends: .demo_check
+#   variables:
+#     server: ml-asm190
+#   before_script:
+#     - mkdir -p modules/software/files
+#     - cp ~/software/LINUX.X64_193000_grid_home.zip modules/software/files
+#     - cp ~/software/LINUX.X64_193000_db_home.zip modules/software/files
+#     - cp ~/software/p6880880_190000_Linux-x86-64.zip modules/software/files
+
+# asm180_demo_check:
+#   extends: .demo_check
+#   variables:
+#     server: ml-asm180
+#   before_script:
+#     - mkdir -p modules/software/files
+#     - cp ~/software/LINUX.X64_180000_grid_home.zip modules/software/files
+#     - cp ~/software/LINUX.X64_180000_db_home.zip modules/software/files
+#     - cp ~/software/p6880880_180000_Linux-x86-64.zip modules/software/files
+
+asm122_demo_check:
+  extends: .demo_check
+  variables:
+    server: ml-asm122
+  before_script:
+    - mkdir -p modules/software/files
+    - cp ~/software/linuxx64_12201_grid_home.zip modules/software/files
+    - cp ~/software/linuxx64_12201_database.zip modules/software/files
+    - cp ~/software/p6880880_122010_Linux-x86-64.zip modules/software/files
+    - cp ~/software/p27468969_122010_Linux-x86-64.zip modules/software/files
+
+# asm121_demo_check:
+#   extends: .demo_check
+#   variables:
+#     server: ml-asm121
+#   before_script:
+#     - mkdir -p modules/software/files
+#     - cp ~/software/linuxamd64_12102_grid_1of2.zip modules/software/files
+#     - cp ~/software/linuxamd64_12102_grid_1of2.zip modules/software/files
+#     - cp ~/software/linuxamd64_12102_database_1of2.zip modules/software/files
+#     - cp ~/software/linuxamd64_12102_database_2of2.zip modules/software/files
+#     - cp ~/software/oracleasmlib-2.0.12-1.el7.x86_64.rpm modules/software/files
+
+# asm112_demo_check:
+#   extends: .demo_check
+#   variables:
+#     server: ml-asm112
+#   before_script:
+#     - mkdir -p modules/software/files
+#     - cp ~/software/oracleasmlib-2.0.12-1.el7.x86_64.rpm modules/software/files
+#     - cp ~/software/p13390677_112040_Linux-x86-64_1of7.zip modules/software/files
+#     - cp ~/software/p13390677_112040_Linux-x86-64_2of7.zip modules/software/files
+#     - cp ~/software/p13390677_112040_Linux-x86-64_3of7.zip modules/software/files
+

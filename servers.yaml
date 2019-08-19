@@ -1,29 +1,72 @@
 ---
+#
+# The default settings for all nodes
+#
+defaults:
+  domain_name:     example.com
+  cpucount:         1
+  dhcp_fix:         true
+  needs_storage:    true
+  additional_hosts:
+    asmmaster:
+      ip: 192.168.254.10
+  box:              enterprisemodules/centos-7.3-x86_64-nocm
+  virtualboxorafix: true
+
+#
+# The default settings for all ML nodes
+#
+ml-defaults:
+  type:             masterless
+
+#
+# The default settings for all PE nodes
+#
+pe-defaults:
+  type:             pe-agent
+  puppet_master:    asmmaster
+
+#
+# The settings for the Puppet Enterprise Server
+#
 pe-asmmaster:
-  public_ip:        '192.168.254.10'
+  public_ip:       '192.168.254.10'
   cpucount:         2
   ram:              3072
   type:             pe-master
+  puppet_installer: puppet-enterprise-2019.1.0-el-7-x86_64/puppet-enterprise-installer
+
+#
+# All masterless nodes
+#
+# RAC112
 ml-asm112:
-  public_ip:        '192.168.254.112'
-  cpucount:         1
-  type:             masterless
-  virtualboxorafix: enable
+  public_ip:        192.168.254.112
+  cpucount:         4
+  ram:              8667
   box:              enterprisemodules/ol-7.3-x86_64-nocm
+  software_files:
+  - oracleasmlib-2.0.12-1.el7.x86_64.rpm
+  - p13390677_112040_Linux-x86-64_1of7.zip
+  - p13390677_112040_Linux-x86-64_2of7.zip
+  - p13390677_112040_Linux-x86-64_3of7.zip
 ml-asm121:
-  public_ip:        '192.168.254.121'
-  cpucount:         1
-  type:             masterless
-  virtualboxorafix: enable
+  public_ip:        192.168.254.121
+  cpucount:         4
+  ram:              8667
   box:              enterprisemodules/ol-7.3-x86_64-nocm
+  software_files:
+  - oracleasmlib-2.0.12-1.el7.x86_64.rpm
+  - linuxamd64_12102_grid_1of2.zip
+  - linuxamd64_12102_grid_1of2.zip
+  - linuxamd64_12102_database_1of2.zip
+  - linuxamd64_12102_database_2of2.zip
+
 ml-asm122:
-  public_ip:        '192.168.254.122'
-  cpucount:         2
-  ram:              8192
-  type:             masterless
-  virtualboxorafix: enable
+  public_ip:        192.168.254.122
+  cpucount:         4
+  ram:              8667
   box:              enterprisemodules/ol-7.3-x86_64-nocm
-  needs_storage:    enabled
   disks:
     data01:
       size: 8192
@@ -40,35 +83,94 @@ ml-asm122:
     reco02:
       size: 8192
       uuid: '5'
+  software_files:
+  - linuxx64_12201_grid_home.zip
+  - linuxx64_12201_database.zip
+  - p6880880_122010_Linux-x86-64.zip
+  - p27468969_122010_Linux-x86-64.zip
 ml-asm180:
-  public_ip:        '192.168.254.180'
-  cpucount:         1
+  public_ip:        192.168.254.180
+  cpucount:         4
   ram:              8667
-  type:             masterless
-  virtualboxorafix: enable
   box:              enterprisemodules/ol-7.3-x86_64-nocm
+  software_files:
+  - LINUX.X64_180000_grid_home.zip
+  - LINUX.X64_180000_db_home.zip
+  - p6880880_180000_Linux-x86-64.zip
+ml-asm190:
+  public_ip:        192.168.254.190
+  cpucount:         4
+  ram:              8667
+  box:              enterprisemodules/ol-7.3-x86_64-nocm
+  software_files:
+  - LINUX.X64_193000_grid_home.zip
+  # - LINUX.X64_193000_db_home.zip
+  # - p6880880_190000_Linux-x86-64.zip
+#
+# All pe-agent nodes
+#
 pe-asm112:
-  public_ip:        '192.168.254.112'
-  cpucount:         1
-  type:             pe-agent
-  virtualboxorafix: enable
-  box:              enterprisemodules/centos-7.5-x86_64-nocm
-pe-asm121:
-  public_ip:        '192.168.254.121'
-  cpucount:         1
-  type:             pe-agent
-  virtualboxorafix: enable
-  box:              enterprisemodules/centos-7.5-x86_64-nocm
-pe-asm122:
-  public_ip:        '192.168.254.122'
-  cpucount:         1
-  type:             pe-agent
-  virtualboxorafix: enable
-  box:              enterprisemodules/centos-7.5-x86_64-nocm
-pe-asm180:
-  public_ip:        '192.168.254.180'
-  cpucount:         1
+  public_ip:        192.168.254.112
+  cpucount:         4
   ram:              8667
-  type:             pe-agent
-  virtualboxorafix: enable
   box:              enterprisemodules/ol-7.3-x86_64-nocm
+  software_files:
+  - oracleasmlib-2.0.12-1.el7.x86_64.rpm
+  - p13390677_112040_Linux-x86-64_1of7.zip
+  - p13390677_112040_Linux-x86-64_2of7.zip
+  - p13390677_112040_Linux-x86-64_3of7.zip
+pe-asm121:
+  public_ip:        192.168.254.121
+  cpucount:         4
+  ram:              8667
+  box:              enterprisemodules/ol-7.3-x86_64-nocm
+  software_files:
+  - oracleasmlib-2.0.12-1.el7.x86_64.rpm
+  - linuxamd64_12102_grid_1of2.zip
+  - linuxamd64_12102_grid_1of2.zip
+  - linuxamd64_12102_database_1of2.zip
+  - linuxamd64_12102_database_2of2.zip
+pe-asm122:
+  public_ip:        192.168.254.122
+  cpucount:         4
+  ram:              8667
+  box:              enterprisemodules/ol-7.3-x86_64-nocm
+  disks:
+    data01:
+      size: 8192
+      uuid: '1'
+    data02:
+      size: 8192
+      uuid: '2'
+    data03:
+      size: 8192
+      uuid: '3'
+    reco01:
+      size: 8192
+      uuid: '4'
+    reco02:
+      size: 8192
+      uuid: '5'
+  software_files:
+  - linuxx64_12201_grid_home.zip
+  - linuxx64_12201_database.zip
+  - p6880880_122010_Linux-x86-64.zip
+  - p27468969_122010_Linux-x86-64.zip
+pe-asm180:
+  public_ip:        192.168.254.180
+  cpucount:         4
+  ram:              8667
+  box:              enterprisemodules/ol-7.3-x86_64-nocm
+  software_files:
+  - LINUX.X64_180000_grid_home.zip
+  - LINUX.X64_180000_db_home.zip
+  - p6880880_180000_Linux-x86-64.zip
+pe-asm190:
+  public_ip:        192.168.254.190
+  cpucount:         4
+  ram:              8667
+  box:              enterprisemodules/ol-7.3-x86_64-nocm
+  software_files:
+  - LINUX.X64_193000_grid_home.zip
+  # - LINUX.X64_193000_db_home.zip
+  # - p6880880_190000_Linux-x86-64.zip
