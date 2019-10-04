@@ -12,6 +12,22 @@ role: role::oradb::simple_asm
 ora_profile::database::db_patches:                                        skip
 ora_profile::database::db_definition:                                     ora_profile::database::db_definition_template
 
+# ora_profile::database::asm_software: skip
+ora_profile::database::asm_patches: skip
+ora_profile::database::asm_setup: skip
+ora_profile::database::asm_init_params: skip
+ora_profile::database::asm_diskgroup: skip
+ora_profile::database::db_software: skip
+ora_profile::database::db_patches: skip
+ora_profile::database::db_definition: skip
+ora_profile::database::asm_listener: skip
+ora_profile::database::db_init_params: skip
+ora_profile::database::db_services: skip
+ora_profile::database::db_tablespaces: skip
+ora_profile::database::db_profiles: skip
+ora_profile::database::db_users: skip
+ora_profile::database::db_startup: skip
+
 
 # ------------------------------------------------------------------------------
 #
@@ -37,7 +53,7 @@ ora_profile::database::asm_storage::nfs_files:
 - /home/nfs_server_data/asm_sda_nfs_b4
 ora_profile::database::asm_storage::nfs_mountpoint:                       /nfs_client
 ora_profile::database::asm_storage::nfs_export:                           /home/nfs_server_data
-ora_profile::database::asm_storage::nfs_server:                           localhost
+ora_profile::database::asm_storage::nfs_server:                           "%{::fqdn}"
 
 
 # ------------------------------------------------------------------------------
@@ -53,6 +69,7 @@ ora_profile::database::asm_software::disk_discovery_string:               '/nfs_
 ora_profile::database::asm_software::asm_disks:                           '/nfs_client/asm_sda_nfs_b1,/nfs_client/asm_sda_nfs_b2'
 ora_profile::database::asm_software::disks_failgroup_names:               ~
 ora_profile::database::asm_software::configure_afd:                       false
+ora_profile::database::asm_software::install_task:                        EXTRACT
 
 
 # ------------------------------------------------------------------------------
