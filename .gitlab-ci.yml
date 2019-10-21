@@ -36,7 +36,7 @@ asm122_demo_check:
     - cp ~/software/linuxx64_12201_database.zip modules/software/files
     - cp ~/software/p6880880_122010_Linux-x86-64.zip modules/software/files
     - cp ~/software/p29708720_122010_Linux-x86-64.zip modules/software/files
-
+    - cp ~/software/p27468969_122010_Linux-x86-64.zip modules/software/files
 # asm121_demo_check:
 #   extends: .demo_check
 #   variables:

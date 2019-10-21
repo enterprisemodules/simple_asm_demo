@@ -81,6 +81,7 @@ ml-asm122:
   - linuxx64_12201_database.zip
   - p6880880_122010_Linux-x86-64.zip
   - p29708720_122010_Linux-x86-64.zip
+  - p27468969_122010_Linux-x86-64.zip
 ml-asm180:
   public_ip:        192.168.254.180
   software_files:
