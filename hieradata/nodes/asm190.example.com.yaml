@@ -3,12 +3,21 @@ deployment_zone: vagrant
 
 role: role::oradb::simple_asm
 
+profile::nfs::nfs_files:
+- /home/nfs_server_data/asm_sda_nfs_b1
+- /home/nfs_server_data/asm_sda_nfs_b2
+- /home/nfs_server_data/asm_sda_nfs_b3
+- /home/nfs_server_data/asm_sda_nfs_b4
+profile::nfs::nfs_mountpoint:                                             /nfs_client
+profile::nfs::nfs_export:                                                 /home/nfs_server_data
+
 
 # ------------------------------------------------------------------------------
 #
 #  Class overrides and additions
 #
 # ------------------------------------------------------------------------------
+ora_profile::database::before_asm_storage:                                profile::nfs
 ora_profile::database::db_patches:                                        skip
 ora_profile::database::db_definition:                                     ora_profile::database::db_definition_template
 
