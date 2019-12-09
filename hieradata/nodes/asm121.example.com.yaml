@@ -3,12 +3,21 @@ deployment_zone: vagrant
 
 role: role::oradb::simple_asm
 
+profile::nfs::nfs_files:
+- /home/nfs_server_data/asm_sda_nfs_b1
+- /home/nfs_server_data/asm_sda_nfs_b2
+- /home/nfs_server_data/asm_sda_nfs_b3
+- /home/nfs_server_data/asm_sda_nfs_b4
+profile::nfs::nfs_mountpoint:                                             /nfs_client
+profile::nfs::nfs_export:                                                 /home/nfs_server_data
+
 
 # ------------------------------------------------------------------------------
 #
 #  Class overrides and additions
 #
 # ------------------------------------------------------------------------------
+ora_profile::database::before_asm_storage:                                profile::nfs
 ora_profile::database::db_patches:                                        skip
 ora_profile::database::db_definition:                                     ora_profile::database::db_definition_template
 
@@ -30,14 +39,9 @@ ora_profile::database::grid_home:                                         /u01/a
 #
 # ------------------------------------------------------------------------------
 ora_profile::database::asm_storage::storage_type:                         nfs
-ora_profile::database::asm_storage::nfs_files:
-- /home/nfs_server_data/asm_sda_nfs_b1
-- /home/nfs_server_data/asm_sda_nfs_b2
-- /home/nfs_server_data/asm_sda_nfs_b3
-- /home/nfs_server_data/asm_sda_nfs_b4
 ora_profile::database::asm_storage::nfs_mountpoint:                       /nfs_client
 ora_profile::database::asm_storage::nfs_export:                           /home/nfs_server_data
-ora_profile::database::asm_storage::nfs_server:                           localhost
+ora_profile::database::asm_storage::nfs_server:                           "%{::fqdn}"
 
 
 # ------------------------------------------------------------------------------
@@ -53,6 +57,35 @@ ora_profile::database::asm_software::disk_discovery_string:               '/nfs_
 ora_profile::database::asm_software::asm_disks:                           '/nfs_client/asm_sda_nfs_b1,/nfs_client/asm_sda_nfs_b2'
 ora_profile::database::asm_software::disks_failgroup_names:               ~
 ora_profile::database::asm_software::configure_afd:                       false
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for asm_patches
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::asm_patches::opversion:                             12.2.0.1.5
+ora_profile::database::asm_patches::patch_file:                            p6880880_121010_Linux-x86-64
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for asm_diskgroup
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::asm_diskgroup::disks:
+  DATA:
+    disks:
+    - diskname: 'DATA_0000'
+      path: '/nfs_client/asm_sda_nfs_b1'
+    - diskname: 'DATA_0001'
+      path: '/nfs_client/asm_sda_nfs_b2'
+  RECO:
+    disks:
+    - diskname: 'RECO_0000'
+      path: '/nfs_client/asm_sda_nfs_b3'
+    - diskname: 'RECO_0001'
+      path: '/nfs_client/asm_sda_nfs_b4'
 
 
 # ------------------------------------------------------------------------------

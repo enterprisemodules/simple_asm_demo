@@ -15,6 +15,7 @@ include:
 #     - cp ~/software/LINUX.X64_193000_grid_home.zip modules/software/files
 #     - cp ~/software/LINUX.X64_193000_db_home.zip modules/software/files
 #     - cp ~/software/p6880880_190000_Linux-x86-64.zip modules/software/files
+#     - cp ~/software/p30116789_190000_Linux-x86-64.zip modules/software/files
 
 # asm180_demo_check:
 #   extends: .demo_check
@@ -25,6 +26,7 @@ include:
 #     - cp ~/software/LINUX.X64_180000_grid_home.zip modules/software/files
 #     - cp ~/software/LINUX.X64_180000_db_home.zip modules/software/files
 #     - cp ~/software/p6880880_180000_Linux-x86-64.zip modules/software/files
+#     - cp ~/software/p30116795_180000_Linux-x86-64.zip modules/software/files
 
 asm122_demo_check:
   extends: .demo_check
