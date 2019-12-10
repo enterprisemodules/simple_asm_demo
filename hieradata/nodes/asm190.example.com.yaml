@@ -3,30 +3,23 @@ deployment_zone: vagrant
 
 role: role::oradb::simple_asm
 
+profile::nfs::nfs_files:
+- /home/nfs_server_data/asm_sda_nfs_b1
+- /home/nfs_server_data/asm_sda_nfs_b2
+- /home/nfs_server_data/asm_sda_nfs_b3
+- /home/nfs_server_data/asm_sda_nfs_b4
+profile::nfs::nfs_mountpoint:                                             /nfs_client
+profile::nfs::nfs_export:                                                 /home/nfs_server_data
+
 
 # ------------------------------------------------------------------------------
 #
 #  Class overrides and additions
 #
 # ------------------------------------------------------------------------------
+ora_profile::database::before_asm_storage:                                profile::nfs
 ora_profile::database::db_patches:                                        skip
 ora_profile::database::db_definition:                                     ora_profile::database::db_definition_template
-
-# ora_profile::database::asm_software: skip
-ora_profile::database::asm_patches: skip
-ora_profile::database::asm_setup: skip
-ora_profile::database::asm_init_params: skip
-ora_profile::database::asm_diskgroup: skip
-ora_profile::database::db_software: skip
-ora_profile::database::db_patches: skip
-ora_profile::database::db_definition: skip
-ora_profile::database::asm_listener: skip
-ora_profile::database::db_init_params: skip
-ora_profile::database::db_services: skip
-ora_profile::database::db_tablespaces: skip
-ora_profile::database::db_profiles: skip
-ora_profile::database::db_users: skip
-ora_profile::database::db_startup: skip
 
 
 # ------------------------------------------------------------------------------
@@ -70,6 +63,31 @@ ora_profile::database::asm_software::asm_disks:                           '/nfs_
 ora_profile::database::asm_software::disks_failgroup_names:               ~
 ora_profile::database::asm_software::configure_afd:                       false
 ora_profile::database::asm_software::install_task:                        EXTRACT
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::asm_patches
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::asm_patches::grid_home:                            "%{::ora_profile::database::grid_home}"
+ora_profile::database::asm_patches::patch_file:                           "%{lookup('ora_profile::database::db_patches::patch_file')}"
+ora_profile::database::asm_patches::opversion:                            "%{lookup('ora_profile::database::db_patches::opversion')}"
+ora_profile::database::asm_patches::patch_list:
+  "%{::ora_profile::database::grid_home}:30116789":                                             # GI Release Update 19.5.0.0.191015
+    source:              "%{::ora_profile::database::source}/p30116789_190000_Linux-x86-64.zip"
+    type:                psu
+    sub_patches:
+    - '30122149'
+    - '30122167'
+    - '29401763'
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::asm_setup
+#
+# ------------------------------------------------------------------------------
 
 
 # ------------------------------------------------------------------------------

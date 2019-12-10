@@ -3,12 +3,21 @@ deployment_zone: vagrant
 
 role: role::oradb::simple_asm
 
+profile::nfs::nfs_files:
+- /home/nfs_server_data/asm_sda_nfs_b1
+- /home/nfs_server_data/asm_sda_nfs_b2
+- /home/nfs_server_data/asm_sda_nfs_b3
+- /home/nfs_server_data/asm_sda_nfs_b4
+profile::nfs::nfs_mountpoint:                                             /nfs_client
+profile::nfs::nfs_export:                                                 /home/nfs_server_data
+
 
 # ------------------------------------------------------------------------------
 #
 #  Class overrides and additions
 #
 # ------------------------------------------------------------------------------
+ora_profile::database::before_asm_storage:                                profile::nfs
 ora_profile::database::db_patches:                                        skip
 ora_profile::database::db_definition:                                     ora_profile::database::db_definition_template
 
@@ -37,7 +46,7 @@ ora_profile::database::asm_storage::nfs_files:
 - /home/nfs_server_data/asm_sda_nfs_b4
 ora_profile::database::asm_storage::nfs_mountpoint:                       /nfs_client
 ora_profile::database::asm_storage::nfs_export:                           /home/nfs_server_data
-ora_profile::database::asm_storage::nfs_server:                           localhost
+ora_profile::database::asm_storage::nfs_server:                           "%{::fqdn}"
 
 
 # ------------------------------------------------------------------------------
@@ -53,6 +62,33 @@ ora_profile::database::asm_software::disk_discovery_string:               '/nfs_
 ora_profile::database::asm_software::asm_disks:                           '/nfs_client/asm_sda_nfs_b1,/nfs_client/asm_sda_nfs_b2'
 ora_profile::database::asm_software::disks_failgroup_names:               ~
 ora_profile::database::asm_software::configure_afd:                       false
+ora_profile::database::asm_software::install_task:                        EXTRACT
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::asm_patches
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::asm_patches::grid_home:                            "%{::ora_profile::database::grid_home}"
+ora_profile::database::asm_patches::patch_file:                           "%{lookup('ora_profile::database::db_patches::patch_file')}"
+ora_profile::database::asm_patches::opversion:                            "%{lookup('ora_profile::database::db_patches::opversion')}"
+ora_profile::database::asm_patches::patch_list:
+  "%{::ora_profile::database::grid_home}:30116795":                                                 # GI Release Update 18.8.0.0.191015
+    source:              "%{::ora_profile::database::source}/p30116795_180000_Linux-x86-64.zip"
+    type:                psu
+    sub_patches:
+    - '30113775'
+    - '30116128'
+    - '28655963'
+    - '30093398'
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::asm_setup
+#
+# ------------------------------------------------------------------------------
 
 
 # ------------------------------------------------------------------------------
@@ -85,6 +121,21 @@ ora_profile::database::db_software::file_name:                            LINUX.
 ora_profile::database::db_software::dirs:
 - /u01/app/oracle/product
 - "/u01/app/oracle/product/%{lookup('ora_profile::database::version')}"
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::db_patches
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::db_patches::patch_file:                            p6880880_180000_Linux-x86-64
+ora_profile::database::db_patches::opversion:                             12.2.0.1.17
+ora_profile::database::db_patches::patch_list:
+  "%{::ora_profile::database::oracle_home}:30116795":                                                 # GI Release Update 18.8.0.0.191015
+    source:              "%{::ora_profile::database::source}/p30116795_180000_Linux-x86-64.zip"
+    sub_patches:
+    - '30112122'
+    - '30113775'
 
 
 # ------------------------------------------------------------------------------

@@ -75,6 +75,7 @@ ora_profile::database::asm_software::disk_discovery_string:               '/dev/
 ora_profile::database::asm_software::asm_disks:                           /dev/asm_data01
 ora_profile::database::asm_software::disks_failgroup_names:               '/dev/asm_data01,'
 ora_profile::database::asm_software::configure_afd:                       true
+ora_profile::database::asm_software::install_task:                        EXTRACT
 
 
 # ------------------------------------------------------------------------------
@@ -86,14 +87,15 @@ ora_profile::database::asm_patches::grid_home:                            "%{::o
 ora_profile::database::asm_patches::patch_file:                           "%{lookup('ora_profile::database::db_patches::patch_file')}"
 ora_profile::database::asm_patches::opversion:                            "%{lookup('ora_profile::database::db_patches::opversion')}"
 ora_profile::database::asm_patches::patch_list:
-  "%{::ora_profile::database::grid_home}:29708720":
-    source:              "p29708720_122010_Linux-x86-64.zip"
+  "%{::ora_profile::database::grid_home}:29708720":                                               # GI Jul 2019 Release Update 12.2.0.1.190716
+    source:              "%{::ora_profile::database::source}/p29708720_122010_Linux-x86-64.zip"
     type:                psu
-    # sub_patches:
-    # - '29770040'
-    # - '29770090'
-    # - '26839277'
-    # - '28566910'
+    sub_patches:
+    - '29757449'
+    - '29770040'
+    - '29770090'
+    - '26839277'
+    - '28566910'
 
 
 # ------------------------------------------------------------------------------
@@ -159,6 +161,20 @@ ora_profile::database::asm_diskgroup::disks:
 #
 # ------------------------------------------------------------------------------
 ora_profile::database::db_software::file_name:                            linuxx64_12201_database
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::db_patches
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::db_patches::opversion:                             12.2.0.1.17
+ora_profile::database::db_patches::patch_list:
+  "%{::ora_profile::database::oracle_home}:29708720":                                             # GI Jul 2019 Release Update 12.2.0.1.190716
+    source:              "%{::ora_profile::database::source}/p29708720_122010_Linux-x86-64.zip"
+    sub_patches:
+    - '29757449'
+    - '29770040'
 
 
 # ------------------------------------------------------------------------------
