@@ -1,4 +1,5 @@
 ---
+easy_type::generate_password_mode:  development
 #------------------------------------------------------------------------------
 #
 # Set lookup merge behaviour
