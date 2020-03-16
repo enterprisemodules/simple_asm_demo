@@ -7,7 +7,7 @@ defaults:
   cpucount:         4
   ram:              8667
   box:              enterprisemodules/ol-7.7-x86_64-nocm
-  dhcp_fix:         true
+  dhcp_fix:         false
   needs_storage:    false
   additional_hosts:
     asmmaster:
@@ -35,12 +35,12 @@ pe-asmmaster:
   cpucount:         2
   ram:              3072
   type:             pe-master
-  puppet_installer: puppet-enterprise-2019.2.0-el-7-x86_64/puppet-enterprise-installer
+  virtualboxorafix: false
+  puppet_installer: puppet-enterprise-2019.3.0-el-7-x86_64/puppet-enterprise-installer
 
 #
 # All masterless nodes
 #
-# RAC112
 ml-asm112:
   public_ip:        192.168.254.112
   software_files:
@@ -114,6 +114,7 @@ pe-asm121:
   - linuxamd64_12102_database_2of2.zip
 pe-asm122:
   public_ip:        192.168.254.122
+  needs_storage:    true
   disks:
     data01:
       size: 8192
