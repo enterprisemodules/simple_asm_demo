@@ -1,7 +1,3 @@
-# forge in this file will not be used by r10k, so it is defined in r10k.yaml
-forge 'http://forge.enterprisemodules.com'
-
-
 mod 'puppetlabs-stdlib'
 mod 'puppetlabs-concat'
 mod 'stm-debconf'
