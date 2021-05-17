@@ -1,6 +1,4 @@
 ---
-deployment_zone: vagrant
-
 role: role::oradb::simple_asm
 
 
@@ -22,14 +20,6 @@ ora_profile::database::dbname:                                            DB122
 ora_profile::database::version:                                           12.2.0.1
 ora_profile::database::db_software::file_name:                            linuxx64_12201_database
 
-
-# # ------------------------------------------------------------------------------
-# #
-# #  Settings for database::asm_packages
-# #
-# # ------------------------------------------------------------------------------
-# ora_profile::database::asm_packages::list:
-#   smartmontools: {}
 
 # ------------------------------------------------------------------------------
 #
@@ -83,19 +73,7 @@ ora_profile::database::asm_software::install_task:                        EXTRAC
 #  Settings for database::asm_patches
 #
 # ------------------------------------------------------------------------------
-ora_profile::database::asm_patches::grid_home:                            "%{::ora_profile::database::grid_home}"
-ora_profile::database::asm_patches::patch_file:                           "%{lookup('ora_profile::database::db_patches::patch_file')}"
-ora_profile::database::asm_patches::opversion:                            "%{lookup('ora_profile::database::db_patches::opversion')}"
-ora_profile::database::asm_patches::patch_list:
-  "%{::ora_profile::database::grid_home}:29708720":                                               # GI Jul 2019 Release Update 12.2.0.1.190716
-    source:              "%{::ora_profile::database::source}/p29708720_122010_Linux-x86-64.zip"
-    type:                psu
-    sub_patches:
-    - '29757449'
-    - '29770040'
-    - '29770090'
-    - '26839277'
-    - '28566910'
+ora_profile::database::asm_patches::level:                                APR2021RU
 
 
 # ------------------------------------------------------------------------------
@@ -103,7 +81,7 @@ ora_profile::database::asm_patches::patch_list:
 #  Settings for database::asm_setup
 #
 # ------------------------------------------------------------------------------
-ora_profile::database::asm_setup::version:                             12.2.0.1
+ora_profile::database::asm_setup::version:                                12.2.0.1
 ora_profile::database::asm_setup::dirs:
   - /u01
   - /u01/app/grid
@@ -168,13 +146,8 @@ ora_profile::database::db_software::file_name:                            linuxx
 #  Settings for database::db_patches
 #
 # ------------------------------------------------------------------------------
-ora_profile::database::db_patches::opversion:                             12.2.0.1.17
-ora_profile::database::db_patches::patch_list:
-  "%{::ora_profile::database::oracle_home}:29708720":                                             # GI Jul 2019 Release Update 12.2.0.1.190716
-    source:              "%{::ora_profile::database::source}/p29708720_122010_Linux-x86-64.zip"
-    sub_patches:
-    - '29757449'
-    - '29770040'
+ora_profile::database::db_patches::level:                                 APR2021RU
+ora_profile::database::db_patches::include_ojvm:                          true
 
 
 # ------------------------------------------------------------------------------

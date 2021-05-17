@@ -3,7 +3,7 @@
 # The default settings for all nodes
 #
 defaults:
-  domain_name:     example.com
+  domain_name:      example.com
   cpucount:         4
   ram:              8667
   box:              enterprisemodules/ol-7.7-x86_64-nocm
@@ -12,7 +12,10 @@ defaults:
   additional_hosts:
     asmmaster:
       ip: 192.168.254.10
-  virtualboxorafix: true
+  virtualboxorafix: false
+  required_plugins: []
+  custom_facts:
+    deployment_zone: vagrant
 
 #
 # The default settings for all ML nodes
@@ -79,21 +82,24 @@ ml-asm122:
   - linuxx64_12201_grid_home.zip
   - linuxx64_12201_database.zip
   - p6880880_122010_Linux-x86-64.zip
-  - p29708720_122010_Linux-x86-64.zip   # GI Jul 2019 Release Update 12.2.0.1.190716
+  - p32540149_122010_Linux-x86-64.zip   # APR2021RU
+  - p32473172_122010_Linux-x86-64.zip   # APR2021RU OJVM
 ml-asm180:
   public_ip:        192.168.254.180
   software_files:
   - LINUX.X64_180000_grid_home.zip
   - LINUX.X64_180000_db_home.zip
-  - p6880880_180000_Linux-x86-64.zip
-  - p30116795_180000_Linux-x86-64.zip   # GI Release Update 18.8.0.0.191015
+  - p6880880_122010_Linux-x86-64.zip
+  - p32524152_180000_Linux-x86-64.zip   # APR2021RU
+  - p32552752_180000_Linux-x86-64.zip   # APR2021RU OJVM
 ml-asm190:
   public_ip:        192.168.254.190
   software_files:
   - LINUX.X64_193000_grid_home.zip
   - LINUX.X64_193000_db_home.zip
-  - p6880880_190000_Linux-x86-64.zip
-  - p30116789_190000_Linux-x86-64.zip   # GI Release Update 19.5.0.0.191015
+  - p6880880_122010_Linux-x86-64.zip
+  - p32545008_190000_Linux-x86-64.zip   # APR2021RU
+  - p32399816_190000_Linux-x86-64.zip   # APR2021RU OJVM
 #
 # All pe-agent nodes
 #
@@ -135,18 +141,21 @@ pe-asm122:
   - linuxx64_12201_grid_home.zip
   - linuxx64_12201_database.zip
   - p6880880_122010_Linux-x86-64.zip
-  - p29708720_122010_Linux-x86-64.zip   # GI Jul 2019 Release Update 12.2.0.1.190716
+  - p32540149_122010_Linux-x86-64.zip   # APR2021RU
+  - p32473172_122010_Linux-x86-64.zip   # APR2021RU OJVM
 pe-asm180:
   public_ip:        192.168.254.180
   software_files:
   - LINUX.X64_180000_grid_home.zip
   - LINUX.X64_180000_db_home.zip
-  - p6880880_180000_Linux-x86-64.zip
-  - p30116795_180000_Linux-x86-64.zip   # GI Release Update 18.8.0.0.191015
+  - p6880880_122010_Linux-x86-64.zip
+  - p32524152_180000_Linux-x86-64.zip   # APR2021RU
+  - p32552752_180000_Linux-x86-64.zip   # APR2021RU OJVM
 pe-asm190:
   public_ip:        192.168.254.190
   software_files:
   - LINUX.X64_193000_grid_home.zip
   - LINUX.X64_193000_db_home.zip
-  - p6880880_190000_Linux-x86-64.zip
-  - p30116789_190000_Linux-x86-64.zip   # GI Release Update 19.5.0.0.191015
+  - p6880880_122010_Linux-x86-64.zip
+  - p32545008_190000_Linux-x86-64.zip   # APR2021RU
+  - p32399816_190000_Linux-x86-64.zip   # APR2021RU OJVM

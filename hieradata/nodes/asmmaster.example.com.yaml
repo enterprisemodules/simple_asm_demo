@@ -1,4 +1,2 @@
 ---
-deployment_zone: vagrant
-
-role: 'role::puppet_master'
+role: role::puppet_master
