@@ -25,6 +25,10 @@ profile::base::hosts::list:
     ip: 192.168.254.190
     host_aliases:
       - asm190
+  asm210.example.com:
+    ip: 192.168.254.210
+    host_aliases:
+      - asm210
   em1215.example.com:
     ip: 192.168.253.120
     host_aliases:
