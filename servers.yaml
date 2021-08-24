@@ -100,6 +100,11 @@ ml-asm190:
   - p6880880_122010_Linux-x86-64.zip
   - p32545008_190000_Linux-x86-64.zip   # APR2021RU
   - p32399816_190000_Linux-x86-64.zip   # APR2021RU OJVM
+ml-asm210:
+  public_ip:        192.168.254.210
+  software_files:
+  - LINUX.X64_213000_grid_home.zip
+  - LINUX.X64_213000_db_home.zip
 #
 # All pe-agent nodes
 #
@@ -159,3 +164,8 @@ pe-asm190:
   - p6880880_122010_Linux-x86-64.zip
   - p32545008_190000_Linux-x86-64.zip   # APR2021RU
   - p32399816_190000_Linux-x86-64.zip   # APR2021RU OJVM
+pe-asm210:
+  public_ip:        192.168.254.210
+  software_files:
+  - LINUX.X64_213000_grid_home.zip
+  - LINUX.X64_213000_db_home.zip

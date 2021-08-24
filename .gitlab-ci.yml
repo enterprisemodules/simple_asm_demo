@@ -6,6 +6,16 @@ include:
   - project: 'enterprisemodules/gitlab_ci'
     file: 'gitlab-ci.yml'
 
+asm210_demo_check:
+  extends: .demo_check
+  variables:
+    server: ml-asm210
+  before_script:
+    - mkdir -p modules/software/files
+    - cp ~/software/LINUX.X64_213000_grid_home.zip modules/software/files
+    - cp ~/software/LINUX.X64_213000_db_home.zip modules/software/files
+    - cp ~/software/p6880880_122010_Linux-x86-64.zip modules/software/files
+
 asm190_demo_check:
   extends: .demo_check
   variables:
@@ -41,6 +51,7 @@ asm122_demo_check:
     - cp ~/software/p6880880_122010_Linux-x86-64.zip modules/software/files
     - cp ~/software/p32540149_122010_Linux-x86-64.zip modules/software/files
     - cp ~/software/p32473172_122010_Linux-x86-64.zip modules/software/files
+
 # asm121_demo_check:
 #   extends: .demo_check
 #   variables:
