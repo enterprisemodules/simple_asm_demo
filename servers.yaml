@@ -11,7 +11,7 @@ defaults:
   needs_storage:    false
   additional_hosts:
     asmmaster:
-      ip: 192.168.254.10
+      ip: 192.168.56.10
   virtualboxorafix: false
   required_plugins: []
   custom_facts:
@@ -34,7 +34,7 @@ pe-defaults:
 # The settings for the Puppet Enterprise Server
 #
 pe-asmmaster:
-  public_ip:       '192.168.254.10'
+  public_ip:       '192.168.56.10'
   cpucount:         2
   ram:              3072
   type:             pe-master
@@ -45,14 +45,14 @@ pe-asmmaster:
 # All masterless nodes
 #
 ml-asm112:
-  public_ip:        192.168.254.112
+  public_ip:        192.168.56.112
   software_files:
   - oracleasmlib-2.0.12-1.el7.x86_64.rpm
   - p13390677_112040_Linux-x86-64_1of7.zip
   - p13390677_112040_Linux-x86-64_2of7.zip
   - p13390677_112040_Linux-x86-64_3of7.zip
 ml-asm121:
-  public_ip:        192.168.254.121
+  public_ip:        192.168.56.121
   software_files:
   - oracleasmlib-2.0.12-1.el7.x86_64.rpm
   - linuxamd64_12102_grid_1of2.zip
@@ -60,7 +60,7 @@ ml-asm121:
   - linuxamd64_12102_database_1of2.zip
   - linuxamd64_12102_database_2of2.zip
 ml-asm122:
-  public_ip:        192.168.254.122
+  public_ip:        192.168.56.122
   needs_storage:    true
   disks:
     data01:
@@ -85,7 +85,7 @@ ml-asm122:
   - p32540149_122010_Linux-x86-64.zip   # APR2021RU
   - p32473172_122010_Linux-x86-64.zip   # APR2021RU OJVM
 ml-asm180:
-  public_ip:        192.168.254.180
+  public_ip:        192.168.56.180
   software_files:
   - LINUX.X64_180000_grid_home.zip
   - LINUX.X64_180000_db_home.zip
@@ -93,7 +93,7 @@ ml-asm180:
   - p32524152_180000_Linux-x86-64.zip   # APR2021RU
   - p32552752_180000_Linux-x86-64.zip   # APR2021RU OJVM
 ml-asm190:
-  public_ip:        192.168.254.190
+  public_ip:        192.168.56.190
   software_files:
   - LINUX.X64_193000_grid_home.zip
   - LINUX.X64_193000_db_home.zip
@@ -101,7 +101,7 @@ ml-asm190:
   - p32545008_190000_Linux-x86-64.zip   # APR2021RU
   - p32399816_190000_Linux-x86-64.zip   # APR2021RU OJVM
 ml-asm210:
-  public_ip:        192.168.254.210
+  public_ip:        192.168.56.210
   software_files:
   - LINUX.X64_213000_grid_home.zip
   - LINUX.X64_213000_db_home.zip
@@ -109,14 +109,14 @@ ml-asm210:
 # All pe-agent nodes
 #
 pe-asm112:
-  public_ip:        192.168.254.112
+  public_ip:        192.168.56.112
   software_files:
   - oracleasmlib-2.0.12-1.el7.x86_64.rpm
   - p13390677_112040_Linux-x86-64_1of7.zip
   - p13390677_112040_Linux-x86-64_2of7.zip
   - p13390677_112040_Linux-x86-64_3of7.zip
 pe-asm121:
-  public_ip:        192.168.254.121
+  public_ip:        192.168.56.121
   software_files:
   - oracleasmlib-2.0.12-1.el7.x86_64.rpm
   - linuxamd64_12102_grid_1of2.zip
@@ -124,7 +124,7 @@ pe-asm121:
   - linuxamd64_12102_database_1of2.zip
   - linuxamd64_12102_database_2of2.zip
 pe-asm122:
-  public_ip:        192.168.254.122
+  public_ip:        192.168.56.122
   needs_storage:    true
   disks:
     data01:
@@ -149,7 +149,7 @@ pe-asm122:
   - p32540149_122010_Linux-x86-64.zip   # APR2021RU
   - p32473172_122010_Linux-x86-64.zip   # APR2021RU OJVM
 pe-asm180:
-  public_ip:        192.168.254.180
+  public_ip:        192.168.56.180
   software_files:
   - LINUX.X64_180000_grid_home.zip
   - LINUX.X64_180000_db_home.zip
@@ -157,7 +157,7 @@ pe-asm180:
   - p32524152_180000_Linux-x86-64.zip   # APR2021RU
   - p32552752_180000_Linux-x86-64.zip   # APR2021RU OJVM
 pe-asm190:
-  public_ip:        192.168.254.190
+  public_ip:        192.168.56.190
   software_files:
   - LINUX.X64_193000_grid_home.zip
   - LINUX.X64_193000_db_home.zip
@@ -165,7 +165,7 @@ pe-asm190:
   - p32545008_190000_Linux-x86-64.zip   # APR2021RU
   - p32399816_190000_Linux-x86-64.zip   # APR2021RU OJVM
 pe-asm210:
-  public_ip:        192.168.254.210
+  public_ip:        192.168.56.210
   software_files:
   - LINUX.X64_213000_grid_home.zip
   - LINUX.X64_213000_db_home.zip
