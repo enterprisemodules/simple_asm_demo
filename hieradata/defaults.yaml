@@ -17,6 +17,14 @@ lookup_options:
     merge:
       strategy: first
 
+ora_profile::database::asm_patches::level:                                APR2021RU
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::db_patches
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::db_patches::level:                                 APR2021RU
+ora_profile::database::db_patches::include_ojvm:                          true
 
 # ------------------------------------------------------------------------------
 #
