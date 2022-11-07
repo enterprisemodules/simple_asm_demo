@@ -1,4 +1,4 @@
-if [ -f /var/log/install_puppet.done ]
+if [ -f /opt/puppetlabs/bin/puppet ]
 then
   echo "Puppet already installed"
 else
@@ -11,10 +11,9 @@ else
     PACKAGE="puppet-agent"
   fi
   echo "Installing $PACKAGE"
-  rhel=$(awk -F'[ .]' 'NF==8{print $4} NF==9{print $7}' /etc/redhat-release)
-  yum install -y --nogpgcheck https://yum.puppetlabs.com/puppet6/puppet6-release-el-${rhel}.noarch.rpm > /dev/null
+  rhel=$(sed -n 's/^VERSION_ID="\(.\)\..".*/\1/p' /etc/os-release)
+  yum install -y --nogpgcheck https://yum.puppetlabs.com/puppet-release-el-${rhel}.noarch.rpm > /dev/null
   yum install -y --nogpgcheck $PACKAGE
   rpm -q git || yum install -y --nogpgcheck git
-
   touch /var/log/install_puppet.done
 fi
