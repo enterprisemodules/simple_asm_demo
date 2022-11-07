@@ -1,6 +1,5 @@
 # Docs
-class role::oradb::simple_asm()
-{
+class role::oradb::simple_asm {
   contain profile::base
   contain ora_profile::database
 

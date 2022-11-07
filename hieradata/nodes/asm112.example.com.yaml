@@ -18,6 +18,7 @@ profile::nfs::nfs_export:                                                 /home/
 ora_profile::database::before_asm_storage:                                profile::nfs
 ora_profile::database::db_patches:                                        skip
 ora_profile::database::db_definition:                                     ora_profile::database::db_definition_template
+ora_profile::database::rman_config:                                       skip
 
 
 # ------------------------------------------------------------------------------
@@ -94,12 +95,3 @@ ora_profile::database::asm_patches::patch_file:                            p6880
 ora_profile::database::asm_listener::oracle_home:                         "%{::ora_profile::database::grid_home}"
 ora_profile::database::asm_listener::oracle_base:                         "%{::ora_profile::database::oracle_base}"
 ora_profile::database::asm_listener::sqlnet_version:                      '11.2'
-
-
-# ------------------------------------------------------------------------------
-#
-#  Settings for database::db_software
-#
-# ------------------------------------------------------------------------------
-ora_profile::database::db_software::database_type:                        EE
-ora_profile::database::db_software::file_name:                            p13390677_112040_Linux-x86-64
