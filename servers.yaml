@@ -6,7 +6,7 @@ defaults:
   domain_name:      example.com
   cpucount:         2
   ram:              8667
-  box:              enterprisemodules/ol-8.1-x86_64-nocm
+  box:              enterprisemodules/ol-7.7-x86_64-nocm
   dhcp_fix:         false
   needs_storage:    false
   additional_hosts:
