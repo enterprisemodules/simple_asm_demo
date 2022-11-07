@@ -18,7 +18,6 @@ ora_profile::database::before_asm_diskgroup:                              ora_pr
 # ------------------------------------------------------------------------------
 ora_profile::database::dbname:                                            DB122
 ora_profile::database::version:                                           12.2.0.1
-ora_profile::database::db_software::file_name:                            linuxx64_12201_database
 
 
 # ------------------------------------------------------------------------------
@@ -73,7 +72,7 @@ ora_profile::database::asm_software::install_task:                        EXTRAC
 #  Settings for database::asm_patches
 #
 # ------------------------------------------------------------------------------
-ora_profile::database::asm_patches::level:                                APR2021RU
+ora_profile::database::asm_patches::level:                                JAN2022RU
 
 
 # ------------------------------------------------------------------------------
@@ -135,19 +134,10 @@ ora_profile::database::asm_diskgroup::disks:
 
 # ------------------------------------------------------------------------------
 #
-#  Settings for database::db_software
-#
-# ------------------------------------------------------------------------------
-ora_profile::database::db_software::file_name:                            linuxx64_12201_database
-
-
-# ------------------------------------------------------------------------------
-#
 #  Settings for database::db_patches
 #
 # ------------------------------------------------------------------------------
-ora_profile::database::db_patches::level:                                 APR2021RU
-ora_profile::database::db_patches::include_ojvm:                          true
+ora_profile::database::db_patches::level:                                 JAN2022RU
 
 
 # ------------------------------------------------------------------------------
@@ -157,3 +147,25 @@ ora_profile::database::db_patches::include_ojvm:                          true
 # ------------------------------------------------------------------------------
 ora_profile::database::asm_listener::oracle_home:                         "%{::ora_profile::database::grid_home}"
 ora_profile::database::asm_listener::oracle_base:                         "%{::ora_profile::database::oracle_base}"
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::rman_config
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::rman_config::settings:
+  DB122:
+    archivelog_backup_copies:
+      DISK: '1'
+    backup_optimization: 'ON'
+    channel:
+      DISK:
+        '1': "FORMAT '+RECO/DB122/1_%U' MAXPIECESIZE 1024M RATE 1G"
+        '2': "FORMAT '+RECO/DB122/2_%U' MAXPIECESIZE 1024M RATE 1G"
+    controlfile_autobackup: 'ON'
+    controlfile_autobackup_format:
+      DISK: '+RECO/DB122/%F'
+    device:
+      DISK: 'PARALLELISM 2 BACKUP TYPE TO COMPRESSED BACKUPSET'
+    rman_output: 'KEEP FOR 30 DAYS'

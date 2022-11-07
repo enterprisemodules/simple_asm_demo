@@ -11,46 +11,55 @@ asm210_demo_check:
   variables:
     server: ml-asm210
   before_script:
+    - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > .netrc
+    - if [ "$USE_LATEST_MODULES" == "yes" ]; then touch ./use_latest_modules ; fi
     - mkdir -p modules/software/files
-    - cp ~/software/LINUX.X64_213000_grid_home.zip modules/software/files
-    - cp ~/software/LINUX.X64_213000_db_home.zip modules/software/files
-    - cp ~/software/p6880880_122010_Linux-x86-64.zip modules/software/files
+    - cp ~/software/LINUX.X64_213000_grid_home.zip   ./modules/software/files/
+    - cp ~/software/LINUX.X64_213000_db_home.zip     ./modules/software/files/
+    - cp ~/software/p6880880_122010_Linux-x86-64.zip ./modules/software/files/
+    - cp ~/software/p34526142_210000_Linux-x86-64.zip ./modules/software/files/
 
 asm190_demo_check:
   extends: .demo_check
   variables:
     server: ml-asm190
   before_script:
+    - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > .netrc
+    - if [ "$USE_LATEST_MODULES" == "yes" ]; then touch ./use_latest_modules ; fi
     - mkdir -p modules/software/files
-    - cp ~/software/LINUX.X64_193000_grid_home.zip modules/software/files
-    - cp ~/software/LINUX.X64_193000_db_home.zip modules/software/files
-    - cp ~/software/p6880880_122010_Linux-x86-64.zip modules/software/files
-    - cp ~/software/p32545008_190000_Linux-x86-64.zip modules/software/files
-    - cp ~/software/p32399816_190000_Linux-x86-64.zip modules/software/files
+    - cp ~/software/LINUX.X64_193000_grid_home.zip    ./modules/software/files/
+    - cp ~/software/LINUX.X64_193000_db_home.zip      ./modules/software/files/
+    - cp ~/software/p6880880_122010_Linux-x86-64.zip  ./modules/software/files/
+    - cp ~/software/p34416665_190000_Linux-x86-64.zip ./modules/software/files/
+    - cp ~/software/p34411846_190000_Linux-x86-64.zip ./modules/software/files/
 
 asm180_demo_check:
   extends: .demo_check
   variables:
     server: ml-asm180
   before_script:
+    - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > .netrc
+    - if [ "$USE_LATEST_MODULES" == "yes" ]; then touch ./use_latest_modules ; fi
     - mkdir -p modules/software/files
-    - cp ~/software/LINUX.X64_180000_grid_home.zip modules/software/files
-    - cp ~/software/LINUX.X64_180000_db_home.zip modules/software/files
-    - cp ~/software/p6880880_122010_Linux-x86-64.zip modules/software/files
-    - cp ~/software/p32524152_180000_Linux-x86-64.zip modules/software/files
-    - cp ~/software/p32552752_180000_Linux-x86-64.zip modules/software/files
+    - cp ~/software/LINUX.X64_180000_grid_home.zip    ./modules/software/files/
+    - cp ~/software/LINUX.X64_180000_db_home.zip      ./modules/software/files/
+    - cp ~/software/p6880880_122010_Linux-x86-64.zip  ./modules/software/files/
+    - cp ~/software/p32524152_180000_Linux-x86-64.zip ./modules/software/files/
+    - cp ~/software/p32552752_180000_Linux-x86-64.zip ./modules/software/files/
 
 asm122_demo_check:
   extends: .demo_check
   variables:
     server: ml-asm122
   before_script:
+    - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > .netrc
+    - if [ "$USE_LATEST_MODULES" == "yes" ]; then touch ./use_latest_modules ; fi
     - mkdir -p modules/software/files
-    - cp ~/software/linuxx64_12201_grid_home.zip modules/software/files
-    - cp ~/software/linuxx64_12201_database.zip modules/software/files
-    - cp ~/software/p6880880_122010_Linux-x86-64.zip modules/software/files
-    - cp ~/software/p32540149_122010_Linux-x86-64.zip modules/software/files
-    - cp ~/software/p32473172_122010_Linux-x86-64.zip modules/software/files
+    - cp ~/software/linuxx64_12201_grid_home.zip      ./modules/software/files/
+    - cp ~/software/linuxx64_12201_database.zip       ./modules/software/files/
+    - cp ~/software/p6880880_122010_Linux-x86-64.zip  ./modules/software/files/
+    - cp ~/software/p33583921_122010_Linux-x86-64.zip ./modules/software/files/
+    - cp ~/software/p33561275_122010_Linux-x86-64.zip ./modules/software/files/
 
 # asm121_demo_check:
 #   extends: .demo_check

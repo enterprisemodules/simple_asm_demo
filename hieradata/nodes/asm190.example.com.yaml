@@ -64,14 +64,6 @@ ora_profile::database::asm_software::install_task:                        EXTRAC
 
 # ------------------------------------------------------------------------------
 #
-#  Settings for database::asm_patches
-#
-# ------------------------------------------------------------------------------
-ora_profile::database::asm_patches::level:                                APR2021RU
-
-
-# ------------------------------------------------------------------------------
-#
 #  Settings for database::asm_diskgroup
 #
 # ------------------------------------------------------------------------------
@@ -95,20 +87,9 @@ ora_profile::database::asm_diskgroup::disks:
 #  Settings for database::db_software
 #
 # ------------------------------------------------------------------------------
-ora_profile::database::db_software::database_type:                        EE
-ora_profile::database::db_software::file_name:                            LINUX.X64_193000_db_home
 ora_profile::database::db_software::dirs:
 - /u01/app/oracle/product
 - "/u01/app/oracle/product/%{lookup('ora_profile::database::version')}"
-
-
-# ------------------------------------------------------------------------------
-#
-#  Settings for database::db_patches
-#
-# ------------------------------------------------------------------------------
-ora_profile::database::db_patches::level:                                 APR2021RU
-ora_profile::database::db_patches::include_ojvm:                          true
 
 
 # ------------------------------------------------------------------------------
@@ -119,3 +100,21 @@ ora_profile::database::db_patches::include_ojvm:                          true
 ora_profile::database::asm_listener::oracle_home:                         "%{::ora_profile::database::grid_home}"
 ora_profile::database::asm_listener::oracle_base:                         "%{::ora_profile::database::oracle_base}"
 ora_profile::database::asm_listener::sqlnet_version:                      '19.0'
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::rman_config
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::rman_config::settings:
+  DB190:
+    archivelog_backup_copies:
+      DISK: '1'
+    backup_optimization: 'ON'
+    controlfile_autobackup: 'ON'
+    controlfile_autobackup_format:
+      DISK: '+RECO/DB190/%F'
+    device:
+      DISK: 'PARALLELISM 2 BACKUP TYPE TO COMPRESSED BACKUPSET'
+    encryption_algorithm: AES256

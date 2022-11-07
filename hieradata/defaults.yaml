@@ -17,13 +17,31 @@ lookup_options:
     merge:
       strategy: first
 
-ora_profile::database::asm_patches::level:                                APR2021RU
+# ------------------------------------------------------------------------------
+#
+#  Class overrides and additions
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::rman_config:                                       ~
+ora_profile::database::fact_caching::enabled:                             true
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::asm_patches
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::asm_patches::opversion:                            12.2.0.1.33
+ora_profile::database::asm_patches::level:                                OCT2022RU
+
+
 # ------------------------------------------------------------------------------
 #
 #  Settings for database::db_patches
 #
 # ------------------------------------------------------------------------------
-ora_profile::database::db_patches::level:                                 APR2021RU
+ora_profile::database::db_patches::opversion:                             12.2.0.1.33
+ora_profile::database::db_patches::level:                                 OCT2022RU
 ora_profile::database::db_patches::include_ojvm:                          true
 
 # ------------------------------------------------------------------------------
