@@ -93,7 +93,7 @@ ml-asm180:
   software_files:
   - LINUX.X64_180000_grid_home.zip
   - LINUX.X64_180000_db_home.zip
-  - p6880880_122010_Linux-x86-64.zip    # OPatch upgrade version 12.2.0.1.33
+  - p6880880_190000_Linux-x86-64.zip    # OPatch upgrade version 12.2.0.1.33
   - p32524152_180000_Linux-x86-64.zip   # 18c APR2021RU
   - p32552752_180000_Linux-x86-64.zip   # 18c APR2021RU OJVM
 
@@ -102,7 +102,7 @@ ml-asm190:
   software_files:
   - LINUX.X64_193000_grid_home.zip
   - LINUX.X64_193000_db_home.zip
-  - p6880880_122010_Linux-x86-64.zip    # OPatch upgrade version 12.2.0.1.33
+  - p6880880_190000_Linux-x86-64.zip    # OPatch upgrade version 12.2.0.1.33
   - p34416665_190000_Linux-x86-64.zip   # 19c OCT2022RU
   - p34411846_190000_Linux-x86-64.zip   # 19c OCT2022RU OJVM
 
@@ -111,7 +111,7 @@ ml-asm210:
   software_files:
   - LINUX.X64_213000_grid_home.zip
   - LINUX.X64_213000_db_home.zip
-  - p6880880_122010_Linux-x86-64.zip    # OPatch upgrade version 12.2.0.1.33
+  - p6880880_190000_Linux-x86-64.zip    # OPatch upgrade version 12.2.0.1.33
   - p34526142_210000_Linux-x86-64.zip   # 21c OCT2022RU
 
 #
@@ -167,7 +167,7 @@ pe-asm180:
   software_files:
   - LINUX.X64_180000_grid_home.zip
   - LINUX.X64_180000_db_home.zip
-  - p6880880_122010_Linux-x86-64.zip    # OPatch upgrade version 12.2.0.1.33
+  - p6880880_190000_Linux-x86-64.zip    # OPatch upgrade version 12.2.0.1.33
   - p32524152_180000_Linux-x86-64.zip   # 18c APR2021RU
   - p32552752_180000_Linux-x86-64.zip   # 18c APR2021RU OJVM
 
@@ -176,7 +176,7 @@ pe-asm190:
   software_files:
   - LINUX.X64_193000_grid_home.zip
   - LINUX.X64_193000_db_home.zip
-  - p6880880_122010_Linux-x86-64.zip    # OPatch upgrade version 12.2.0.1.33
+  - p6880880_190000_Linux-x86-64.zip    # OPatch upgrade version 12.2.0.1.33
   - p34416665_190000_Linux-x86-64.zip   # 19c OCT2022RU
   - p34411846_190000_Linux-x86-64.zip   # 19c OCT2022RU OJVM
 
@@ -185,5 +185,5 @@ pe-asm210:
   software_files:
   - LINUX.X64_213000_grid_home.zip
   - LINUX.X64_213000_db_home.zip
-  - p6880880_122010_Linux-x86-64.zip    # OPatch upgrade version 12.2.0.1.33
+  - p6880880_190000_Linux-x86-64.zip    # OPatch upgrade version 12.2.0.1.33
   - p34526142_210000_Linux-x86-64.zip   # 21c OCT2022RU

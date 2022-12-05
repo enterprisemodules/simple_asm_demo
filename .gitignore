@@ -36,3 +36,5 @@
 /modules/firewall
 /modules/firewalld
 /modules/ora_profile
+/modules/augeasproviders_grub/
+/modules/ora_secured/

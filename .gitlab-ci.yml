@@ -16,7 +16,7 @@ asm210_demo_check:
     - mkdir -p modules/software/files
     - cp ~/software/LINUX.X64_213000_grid_home.zip   ./modules/software/files/
     - cp ~/software/LINUX.X64_213000_db_home.zip     ./modules/software/files/
-    - cp ~/software/p6880880_122010_Linux-x86-64.zip ./modules/software/files/
+    - cp ~/software/p6880880_190000_Linux-x86-64.zip ./modules/software/files/
     - cp ~/software/p34526142_210000_Linux-x86-64.zip ./modules/software/files/
 
 asm190_demo_check:
@@ -29,7 +29,7 @@ asm190_demo_check:
     - mkdir -p modules/software/files
     - cp ~/software/LINUX.X64_193000_grid_home.zip    ./modules/software/files/
     - cp ~/software/LINUX.X64_193000_db_home.zip      ./modules/software/files/
-    - cp ~/software/p6880880_122010_Linux-x86-64.zip  ./modules/software/files/
+    - cp ~/software/p6880880_190000_Linux-x86-64.zip  ./modules/software/files/
     - cp ~/software/p34416665_190000_Linux-x86-64.zip ./modules/software/files/
     - cp ~/software/p34411846_190000_Linux-x86-64.zip ./modules/software/files/
 
@@ -43,7 +43,7 @@ asm180_demo_check:
     - mkdir -p modules/software/files
     - cp ~/software/LINUX.X64_180000_grid_home.zip    ./modules/software/files/
     - cp ~/software/LINUX.X64_180000_db_home.zip      ./modules/software/files/
-    - cp ~/software/p6880880_122010_Linux-x86-64.zip  ./modules/software/files/
+    - cp ~/software/p6880880_190000_Linux-x86-64.zip  ./modules/software/files/
     - cp ~/software/p32524152_180000_Linux-x86-64.zip ./modules/software/files/
     - cp ~/software/p32552752_180000_Linux-x86-64.zip ./modules/software/files/
 
@@ -57,7 +57,7 @@ asm122_demo_check:
     - mkdir -p modules/software/files
     - cp ~/software/linuxx64_12201_grid_home.zip      ./modules/software/files/
     - cp ~/software/linuxx64_12201_database.zip       ./modules/software/files/
-    - cp ~/software/p6880880_122010_Linux-x86-64.zip  ./modules/software/files/
+    - cp ~/software/p6880880_190000_Linux-x86-64.zip  ./modules/software/files/
     - cp ~/software/p33583921_122010_Linux-x86-64.zip ./modules/software/files/
     - cp ~/software/p33561275_122010_Linux-x86-64.zip ./modules/software/files/
 
