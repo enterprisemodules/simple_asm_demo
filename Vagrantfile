@@ -132,7 +132,7 @@ pe_puppet_group_id = 496
 VAGRANT_ROOT       = File.dirname(__FILE__)
 home               = ENV['HOME']
 
-def masterless_setup(config, server, srv, hostname)
+def masterless_setup(server, srv, hostname)
   if srv.vm.communicator == 'ssh'
     if server['custom_facts']
       @provisioners << { shell: { inline: facter_overrides(server['custom_facts'], 'linux'),
@@ -167,7 +167,7 @@ def masterless_setup(config, server, srv, hostname)
   end
 end
 
-def puppet_master_setup(config, srv, server, puppet_installer, pe_puppet_user_id, pe_puppet_group_id, hostname)
+def puppet_master_setup(srv, server, puppet_installer, pe_puppet_user_id, pe_puppet_group_id, hostname)
   srv.vm.synced_folder '.', '/vagrant', owner: pe_puppet_user_id, group: pe_puppet_group_id
 
   if server['custom_facts']
@@ -182,7 +182,7 @@ def puppet_master_setup(config, srv, server, puppet_installer, pe_puppet_user_id
                                       options: '--test' } }
 end
 
-def puppet_agent_setup(config, server, srv, hostname)
+def puppet_agent_setup(server, srv, hostname)
   if srv.vm.communicator == 'ssh'
     if server['custom_facts']
       @provisioners << { shell: { inline: facter_overrides(server['custom_facts'], 'linux'),
@@ -445,11 +445,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       #
       case server['type']
       when 'masterless'
-        masterless_setup(config, server, srv, hostname)
+        masterless_setup(server, srv, hostname)
       when 'pe-master'
-        puppet_master_setup(config, srv, server, puppet_installer, pe_puppet_user_id, pe_puppet_group_id, hostname)
+        puppet_master_setup(srv, server, puppet_installer, pe_puppet_user_id, pe_puppet_group_id, hostname)
       when 'pe-agent'
-        puppet_agent_setup(config, server, srv, hostname)
+        puppet_agent_setup(server, srv, hostname)
         begin
           "#{server['type']} is invalid."
         rescue => exception
