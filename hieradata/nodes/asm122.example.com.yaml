@@ -18,6 +18,8 @@ ora_profile::database::before_asm_diskgroup:                              ora_pr
 # ------------------------------------------------------------------------------
 ora_profile::database::dbname:                                            DB122
 ora_profile::database::version:                                           12.2.0.1
+ora_profile::database::grid_home:                                         /u01/app/grid/product/%{lookup('ora_profile::database::version')}/grid_home1
+ora_profile::database::oracle_home:                                       /u01/app/oracle/product/%{lookup('ora_profile::database::version')}/db_home1
 
 
 # ------------------------------------------------------------------------------
@@ -57,7 +59,6 @@ ora_profile::database::asm_storage::disk_devices:
 ora_profile::database::asm_software::version:                             12.2.0.1
 ora_profile::database::asm_software::dirs:
 - /u01/app/grid/product/12.2.0.1
-ora_profile::database::asm_software::grid_home:                           "%{::ora_profile::database::grid_home}"
 ora_profile::database::asm_software::file_name:                           linuxx64_12201_grid_home
 ora_profile::database::asm_software::install_task:                        EXTRACT
 ora_profile::database::asm_software::disk_discovery_string:               '/dev/asm_data*,/dev/asm_reco*'
