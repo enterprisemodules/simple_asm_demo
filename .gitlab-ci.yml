@@ -13,11 +13,11 @@ asm210_demo_check:
   before_script:
     - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > .netrc
     - if [ "$USE_LATEST_MODULES" == "yes" ]; then touch ./use_latest_modules ; fi
-    - mkdir -p modules/software/files
-    - cp ~/software/LINUX.X64_213000_grid_home.zip   ./modules/software/files/
-    - cp ~/software/LINUX.X64_213000_db_home.zip     ./modules/software/files/
-    - cp ~/software/p6880880_190000_Linux-x86-64.zip ./modules/software/files/
-    - cp ~/software/p34526142_210000_Linux-x86-64.zip ./modules/software/files/
+    - mkdir -p ./modules/software/files
+    - cp ~/software/LINUX.X64_213000_grid_home.zip                ./modules/software/files/  # 21c grid home
+    - cp ~/software/LINUX.X64_213000_db_home.zip                  ./modules/software/files/  # 21c oracle home
+    - cp ~/software/p6880880_190000_Linux-x86-64-12.2.0.1.33.zip  ./modules/software/files/  # OPatch upgrade version 12.2.0.1.33
+    - cp ~/software/p34526142_210000_Linux-x86-64.zip             ./modules/software/files/  # 21c OCT2022RU
 
 asm190_demo_check:
   extends: .demo_check
@@ -26,12 +26,12 @@ asm190_demo_check:
   before_script:
     - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > .netrc
     - if [ "$USE_LATEST_MODULES" == "yes" ]; then touch ./use_latest_modules ; fi
-    - mkdir -p modules/software/files
-    - cp ~/software/LINUX.X64_193000_grid_home.zip    ./modules/software/files/
-    - cp ~/software/LINUX.X64_193000_db_home.zip      ./modules/software/files/
-    - cp ~/software/p6880880_190000_Linux-x86-64.zip  ./modules/software/files/
-    - cp ~/software/p34416665_190000_Linux-x86-64.zip ./modules/software/files/
-    - cp ~/software/p34411846_190000_Linux-x86-64.zip ./modules/software/files/
+    - mkdir -p ./modules/software/files
+    - cp ~/software/LINUX.X64_193000_grid_home.zip                ./modules/software/files/  # 19c grid home
+    - cp ~/software/LINUX.X64_193000_db_home.zip                  ./modules/software/files/  # 19c oracle home
+    - cp ~/software/p6880880_190000_Linux-x86-64-12.2.0.1.33.zip  ./modules/software/files/  # OPatch upgrade version 12.2.0.1.33
+    - cp ~/software/p34416665_190000_Linux-x86-64.zip             ./modules/software/files/  # 19c OCT2022RU
+    - cp ~/software/p34411846_190000_Linux-x86-64.zip             ./modules/software/files/  # 19c OCT2022RU OJVM
 
 asm180_demo_check:
   extends: .demo_check
@@ -40,12 +40,12 @@ asm180_demo_check:
   before_script:
     - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > .netrc
     - if [ "$USE_LATEST_MODULES" == "yes" ]; then touch ./use_latest_modules ; fi
-    - mkdir -p modules/software/files
-    - cp ~/software/LINUX.X64_180000_grid_home.zip    ./modules/software/files/
-    - cp ~/software/LINUX.X64_180000_db_home.zip      ./modules/software/files/
-    - cp ~/software/p6880880_190000_Linux-x86-64.zip  ./modules/software/files/
-    - cp ~/software/p32524152_180000_Linux-x86-64.zip ./modules/software/files/
-    - cp ~/software/p32552752_180000_Linux-x86-64.zip ./modules/software/files/
+    - mkdir -p ./modules/software/files
+    - cp ~/software/LINUX.X64_180000_grid_home.zip                ./modules/software/files/  # 18c grid home
+    - cp ~/software/LINUX.X64_180000_db_home.zip                  ./modules/software/files/  # 18c oracle home
+    - cp ~/software/p6880880_190000_Linux-x86-64-12.2.0.1.33.zip  ./modules/software/files/  # OPatch upgrade version 12.2.0.1.33
+    - cp ~/software/p32524152_180000_Linux-x86-64.zip             ./modules/software/files/  # 18c APR2021RU
+    - cp ~/software/p32552752_180000_Linux-x86-64.zip             ./modules/software/files/  # 18c APR2021RU OJVM
 
 asm122_demo_check:
   extends: .demo_check
@@ -54,19 +54,19 @@ asm122_demo_check:
   before_script:
     - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > .netrc
     - if [ "$USE_LATEST_MODULES" == "yes" ]; then touch ./use_latest_modules ; fi
-    - mkdir -p modules/software/files
-    - cp ~/software/linuxx64_12201_grid_home.zip      ./modules/software/files/
-    - cp ~/software/linuxx64_12201_database.zip       ./modules/software/files/
-    - cp ~/software/p6880880_190000_Linux-x86-64.zip  ./modules/software/files/
-    - cp ~/software/p33583921_122010_Linux-x86-64.zip ./modules/software/files/
-    - cp ~/software/p33561275_122010_Linux-x86-64.zip ./modules/software/files/
+    - mkdir -p ./modules/software/files
+    - cp ~/software/linuxx64_12201_grid_home.zip                  ./modules/software/files/  # 12cR2 grid home
+    - cp ~/software/linuxx64_12201_database.zip                   ./modules/software/files/  # 12cR2 oracle home
+    - cp ~/software/p6880880_190000_Linux-x86-64-12.2.0.1.33.zip  ./modules/software/files/  # OPatch upgrade version 12.2.0.1.33
+    - cp ~/software/p33583921_122010_Linux-x86-64.zip             ./modules/software/files/  # 12cR2 JAN2022RU
+    - cp ~/software/p33561275_122010_Linux-x86-64.zip             ./modules/software/files/  # 12cR2 JAN2022RU OJVM
 
 # asm121_demo_check:
 #   extends: .demo_check
 #   variables:
 #     server: ml-asm121
 #   before_script:
-#     - mkdir -p modules/software/files
+#     - mkdir -p ./modules/software/files
 #     - cp ~/software/linuxamd64_12102_grid_1of2.zip modules/software/files
 #     - cp ~/software/linuxamd64_12102_grid_1of2.zip modules/software/files
 #     - cp ~/software/linuxamd64_12102_database_1of2.zip modules/software/files
@@ -78,7 +78,7 @@ asm122_demo_check:
 #   variables:
 #     server: ml-asm112
 #   before_script:
-#     - mkdir -p modules/software/files
+#     - mkdir -p ./modules/software/files
 #     - cp ~/software/oracleasmlib-2.0.12-1.el7.x86_64.rpm modules/software/files
 #     - cp ~/software/p13390677_112040_Linux-x86-64_1of7.zip modules/software/files
 #     - cp ~/software/p13390677_112040_Linux-x86-64_2of7.zip modules/software/files

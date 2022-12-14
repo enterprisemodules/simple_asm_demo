@@ -18,8 +18,6 @@ ora_profile::database::before_asm_diskgroup:                              ora_pr
 # ------------------------------------------------------------------------------
 ora_profile::database::dbname:                                            DB122
 ora_profile::database::version:                                           12.2.0.1
-ora_profile::database::grid_home:                                         /u01/app/grid/product/%{lookup('ora_profile::database::version')}/grid_home1
-ora_profile::database::oracle_home:                                       /u01/app/oracle/product/%{lookup('ora_profile::database::version')}/db_home1
 
 
 # ------------------------------------------------------------------------------
@@ -56,11 +54,7 @@ ora_profile::database::asm_storage::disk_devices:
 #  Settings for database::asm_software
 #
 # ------------------------------------------------------------------------------
-ora_profile::database::asm_software::version:                             12.2.0.1
-ora_profile::database::asm_software::dirs:
-- /u01/app/grid/product/12.2.0.1
-ora_profile::database::asm_software::file_name:                           linuxx64_12201_grid_home
-ora_profile::database::asm_software::install_task:                        EXTRACT
+ora_profile::database::asm_software::version:                             "%{lookup('ora_profile::database::version')}"
 ora_profile::database::asm_software::disk_discovery_string:               '/dev/asm_data*,/dev/asm_reco*'
 ora_profile::database::asm_software::asm_disks:                           /dev/asm_data01
 ora_profile::database::asm_software::disks_failgroup_names:               '/dev/asm_data01,'
@@ -73,6 +67,7 @@ ora_profile::database::asm_software::install_task:                        EXTRAC
 #  Settings for database::asm_patches
 #
 # ------------------------------------------------------------------------------
+ora_profile::database::asm_patches::patch_file:                           p6880880_190000_Linux-x86-64-%{lookup('ora_profile::database::db_patches::opversion')}
 ora_profile::database::asm_patches::level:                                JAN2022RU
 
 
@@ -81,15 +76,6 @@ ora_profile::database::asm_patches::level:                                JAN202
 #  Settings for database::asm_setup
 #
 # ------------------------------------------------------------------------------
-ora_profile::database::asm_setup::version:                                12.2.0.1
-ora_profile::database::asm_setup::dirs:
-  - /u01
-  - /u01/app/grid
-  - /u01/app/grid/admin
-  - /u01/app/grid/product
-  - "/u01/app/grid/product/%{lookup('ora_profile::database::asm_setup::version')}"
-ora_profile::database::asm_setup::grid_home:                           "%{ora_profile::database::grid_home}"
-ora_profile::database::asm_setup::file_name:                           linuxx64_12201_grid_home
 ora_profile::database::asm_setup::asm_sys_password:                    Change_on_1nstall
 ora_profile::database::asm_setup::asm_diskgroup:                       DATA
 ora_profile::database::asm_setup::grid_type:                           HA_CONFIG
@@ -135,27 +121,12 @@ ora_profile::database::asm_diskgroup::disks:
 
 # ------------------------------------------------------------------------------
 #
-#  Settings for database::db_software
-#
-# ------------------------------------------------------------------------------
-ora_profile::database::db_software::file_name:                            linuxx64_12201_database
-
-
-# ------------------------------------------------------------------------------
-#
 #  Settings for database::db_patches
 #
 # ------------------------------------------------------------------------------
+ora_profile::database::db_patches::patch_file:                            p6880880_190000_Linux-x86-64-%{lookup('ora_profile::database::db_patches::opversion')}
 ora_profile::database::db_patches::level:                                 JAN2022RU
-
-
-# ------------------------------------------------------------------------------
-#
-#  Settings for database::asm_listener
-#
-# ------------------------------------------------------------------------------
-ora_profile::database::asm_listener::oracle_home:                         "%{::ora_profile::database::grid_home}"
-ora_profile::database::asm_listener::oracle_base:                         "%{::ora_profile::database::oracle_base}"
+ora_profile::database::db_patches::include_ojvm:                          true
 
 
 # ------------------------------------------------------------------------------

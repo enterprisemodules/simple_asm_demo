@@ -28,8 +28,6 @@ ora_profile::database::rman_config:                                       skip
 # ------------------------------------------------------------------------------
 ora_profile::database::dbname:                                            DB112
 ora_profile::database::version:                                           11.2.0.4
-ora_profile::database::oracle_home:                                       /u01/app/oracle/product/11.2.0.4/db_home1
-ora_profile::database::grid_home:                                         /u01/app/grid/product/11.2.0.4/grid_home1
 
 
 # ------------------------------------------------------------------------------
@@ -48,10 +46,7 @@ ora_profile::database::asm_storage::nfs_server:                           "%{::f
 #  Settings for database::asm_software
 #
 # ------------------------------------------------------------------------------
-ora_profile::database::asm_software::version:                             11.2.0.4
-ora_profile::database::asm_software::dirs:
-- /u01/app/grid/product/11.2.0.4
-ora_profile::database::asm_software::file_name:                           p13390677_112040_Linux-x86-64_3of7.zip
+ora_profile::database::asm_software::version:                             "%{lookup('ora_profile::database::version')}"
 ora_profile::database::asm_software::disk_discovery_string:               '/nfs_client/asm*'
 ora_profile::database::asm_software::asm_disks:                           '/nfs_client/asm_sda_nfs_b1,/nfs_client/asm_sda_nfs_b2'
 ora_profile::database::asm_software::disks_failgroup_names:               ~
@@ -85,21 +80,3 @@ ora_profile::database::asm_diskgroup::disks:
 # ------------------------------------------------------------------------------
 ora_profile::database::asm_patches::opversion:                             11.2.0.3.18
 ora_profile::database::asm_patches::patch_file:                            p6880880_112000_Linux-x86-64
-
-
-# ------------------------------------------------------------------------------
-#
-#  Settings for database::db_software
-#
-# ------------------------------------------------------------------------------
-ora_profile::database::db_software::file_name:                            p13390677_112040_Linux-x86-64
-
-
-# ------------------------------------------------------------------------------
-#
-#  Settings for database::asm_listener
-#
-# ------------------------------------------------------------------------------
-ora_profile::database::asm_listener::oracle_home:                         "%{::ora_profile::database::grid_home}"
-ora_profile::database::asm_listener::oracle_base:                         "%{::ora_profile::database::oracle_base}"
-ora_profile::database::asm_listener::sqlnet_version:                      '11.2'
