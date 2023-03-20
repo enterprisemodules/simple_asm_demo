@@ -38,7 +38,8 @@ pe-asmmaster:
   ram:              3072
   type:             pe-master
   virtualboxorafix: false
-  puppet_installer: puppet-enterprise-2021.5.0-el-8-x86_64/puppet-enterprise-installer
+  box:              enterprisemodules/ol-8.1-x86_64-nocm
+  puppet_installer: puppet-enterprise-2023.0.0-el-8-x86_64/puppet-enterprise-installer
 
 #
 # All masterless nodes
@@ -54,7 +55,6 @@ ml-asm112:
 
 ml-asm121:
   public_ip:        192.168.56.121
-  box:              enterprisemodules/ol-7.7-x86_64-nocm
   software_files:
   - oracleasmlib-2.0.12-1.el7.x86_64.rpm
   - linuxamd64_12102_grid_1of2.zip
@@ -128,7 +128,6 @@ pe-asm112:
 
 pe-asm121:
   public_ip:        192.168.56.121
-  box:              enterprisemodules/ol-7.7-x86_64-nocm
   software_files:
   - oracleasmlib-2.0.12-1.el7.x86_64.rpm
   - linuxamd64_12102_grid_1of2.zip
