@@ -38,7 +38,7 @@ ora_profile::database::version:                                           11.2.0
 ora_profile::database::asm_storage::storage_type:                         nfs
 ora_profile::database::asm_storage::nfs_mountpoint:                       /nfs_client
 ora_profile::database::asm_storage::nfs_export:                           /home/nfs_server_data
-ora_profile::database::asm_storage::nfs_server:                           "%{::fqdn}"
+ora_profile::database::asm_storage::nfs_server:                           "%{facts.networking.fqdn}"
 
 
 # ------------------------------------------------------------------------------
