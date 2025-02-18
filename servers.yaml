@@ -4,48 +4,25 @@
 #
 defaults:
   domain_name:      example.com
-  cpucount:         2
-  ram:              8667
+  ip_start_address: 192.168.56.110
+  prefix:           asm
+  cpucount:         1
+  ram:              6144
   box:              enterprisemodules/ol-7.7-x86_64-nocm
   dhcp_fix:         false
   needs_storage:    false
-  additional_hosts:
-    asmmaster:
-      ip: 192.168.56.10
   virtualboxorafix: false
-  required_plugins: []
-  custom_facts:
-    deployment_zone: vagrant
-
-#
-# The default settings for all ML nodes
-#
-ml-defaults:
-  type:             masterless
-
-#
-# The default settings for all PE nodes
-#
-pe-defaults:
-  type:             pe-agent
-  puppet_master:    asmmaster
 
 #
 # The settings for the Puppet Enterprise Server
 #
-pe-asmmaster:
-  public_ip:       '192.168.56.10'
-  ram:              3072
-  type:             pe-master
-  virtualboxorafix: false
-  box:              enterprisemodules/ol-8.1-x86_64-nocm
-  puppet_installer: puppet-enterprise-2023.0.0-el-8-x86_64/puppet-enterprise-installer
+pe-puppetserver:
+  puppet_installer: puppet-enterprise-2019.5.0-el-8-x86_64/puppet-enterprise-installer
 
 #
-# All masterless nodes
+# All  nodes
 #
-ml-asm112:
-  public_ip:        192.168.56.112
+asm112:
   box:              enterprisemodules/ol-6.8-x86_64-nocm # Box not in cloud anymore...
   software_files:
   - oracleasmlib-2.0.12-1.el7.x86_64.rpm
@@ -53,8 +30,7 @@ ml-asm112:
   - p13390677_112040_Linux-x86-64_2of7.zip
   - p13390677_112040_Linux-x86-64_3of7.zip
 
-ml-asm121:
-  public_ip:        192.168.56.121
+asm121:
   software_files:
   - oracleasmlib-2.0.12-1.el7.x86_64.rpm
   - linuxamd64_12102_grid_1of2.zip
@@ -62,8 +38,7 @@ ml-asm121:
   - linuxamd64_12102_database_1of2.zip
   - linuxamd64_12102_database_2of2.zip
 
-ml-asm122:
-  public_ip:        192.168.56.122
+asm122:
   needs_storage:    true
   disks:
     data01:
@@ -88,8 +63,7 @@ ml-asm122:
   - p33583921_122010_Linux-x86-64.zip               # 12cR2 JAN2022RU
   - p33561275_122010_Linux-x86-64.zip               # 12cR2 JAN2022RU OJVM
 
-ml-asm180:
-  public_ip:        192.168.56.180
+asm180:
   software_files:
   - LINUX.X64_180000_grid_home.zip
   - LINUX.X64_180000_db_home.zip
@@ -97,8 +71,7 @@ ml-asm180:
   - p32524152_180000_Linux-x86-64.zip               # 18c APR2021RU
   - p32552752_180000_Linux-x86-64.zip               # 18c APR2021RU OJVM
 
-ml-asm190:
-  public_ip:        192.168.56.190
+asm190:
   software_files:
   - LINUX.X64_193000_grid_home.zip
   - LINUX.X64_193000_db_home.zip
@@ -106,83 +79,10 @@ ml-asm190:
   - p34416665_190000_Linux-x86-64.zip               # 19c OCT2022RU
   - p34411846_190000_Linux-x86-64.zip               # 19c OCT2022RU OJVM
 
-ml-asm210:
-  public_ip:        192.168.56.210
+asm210:
   software_files:
   - LINUX.X64_213000_grid_home.zip
   - LINUX.X64_213000_db_home.zip
   - p6880880_190000_Linux-x86-64-12.2.0.1.33.zip    # OPatch upgrade version 12.2.0.1.33
   - p34526142_210000_Linux-x86-64.zip               # 21c OCT2022RU
 
-#
-# All pe-agent nodes
-#
-pe-asm112:
-  public_ip:        192.168.56.112
-  box:              enterprisemodules/ol-6.8-x86_64-nocm # Box not in cloud anymore...
-  software_files:
-  - oracleasmlib-2.0.12-1.el7.x86_64.rpm
-  - p13390677_112040_Linux-x86-64_1of7.zip
-  - p13390677_112040_Linux-x86-64_2of7.zip
-  - p13390677_112040_Linux-x86-64_3of7.zip
-
-pe-asm121:
-  public_ip:        192.168.56.121
-  software_files:
-  - oracleasmlib-2.0.12-1.el7.x86_64.rpm
-  - linuxamd64_12102_grid_1of2.zip
-  - linuxamd64_12102_grid_1of2.zip
-  - linuxamd64_12102_database_1of2.zip
-  - linuxamd64_12102_database_2of2.zip
-
-pe-asm122:
-  public_ip:        192.168.56.122
-  needs_storage:    true
-  disks:
-    data01:
-      size: 8192
-      uuid: '1'
-    data02:
-      size: 8192
-      uuid: '2'
-    data03:
-      size: 8192
-      uuid: '3'
-    reco01:
-      size: 8192
-      uuid: '4'
-    reco02:
-      size: 8192
-      uuid: '5'
-  software_files:
-  - linuxx64_12201_grid_home.zip
-  - linuxx64_12201_database.zip
-  - p6880880_190000_Linux-x86-64-12.2.0.1.33.zip    # OPatch upgrade version 12.2.0.1.33
-  - p33583921_122010_Linux-x86-64.zip               # 12cR2 JAN2022RU
-  - p33561275_122010_Linux-x86-64.zip               # 12cR2 JAN2022RU OJVM
-
-pe-asm180:
-  public_ip:        192.168.56.180
-  software_files:
-  - LINUX.X64_180000_grid_home.zip
-  - LINUX.X64_180000_db_home.zip
-  - p6880880_190000_Linux-x86-64-12.2.0.1.33.zip    # OPatch upgrade version 12.2.0.1.33
-  - p32524152_180000_Linux-x86-64.zip               # 18c APR2021RU
-  - p32552752_180000_Linux-x86-64.zip               # 18c APR2021RU OJVM
-
-pe-asm190:
-  public_ip:        192.168.56.190
-  software_files:
-  - LINUX.X64_193000_grid_home.zip
-  - LINUX.X64_193000_db_home.zip
-  - p6880880_190000_Linux-x86-64-12.2.0.1.33.zip    # OPatch upgrade version 12.2.0.1.33
-  - p34416665_190000_Linux-x86-64.zip               # 19c OCT2022RU
-  - p34411846_190000_Linux-x86-64.zip               # 19c OCT2022RU OJVM
-
-pe-asm210:
-  public_ip:        192.168.56.210
-  software_files:
-  - LINUX.X64_213000_grid_home.zip
-  - LINUX.X64_213000_db_home.zip
-  - p6880880_190000_Linux-x86-64-12.2.0.1.33.zip    # OPatch upgrade version 12.2.0.1.33
-  - p34526142_210000_Linux-x86-64.zip               # 21c OCT2022RU
