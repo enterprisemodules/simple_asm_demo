@@ -10,7 +10,7 @@ File {
 # might go down during these times.
 #
 schedule { 'maintenance-window':
-  range  => "00:00 - 23:59"  # Change to your requirements
+  range  => '00:00 - 23:59'  # Change to your requirements
 }
 
-lookup('role', {merge => unique}).include
+lookup('role', { merge => unique }).include

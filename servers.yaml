@@ -12,6 +12,7 @@ defaults:
   dhcp_fix:         false
   needs_storage:    false
   virtualboxorafix: false
+  run_r10k:         false
 
 #
 # The settings for the Puppet Enterprise Server
@@ -86,3 +87,9 @@ asm210:
   - p6880880_190000_Linux-x86-64-12.2.0.1.33.zip    # OPatch upgrade version 12.2.0.1.33
   - p34526142_210000_Linux-x86-64.zip               # 21c OCT2022RU
 
+asm230:
+  box:              enterprisemodules/ol-8.1-x86_64-nocm
+  software_files:
+  - LINUX.X64_235000_forEngineeredSystems_grid_home.zip
+  - LINUX.X64_235000_forEngineeredSystems_db_home.zip
+  - p6880880_230000_Linux-x86-64-12.2.0.1.46.zip    # OPatch upgrade version 12.2.0.1.46
