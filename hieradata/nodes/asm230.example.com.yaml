@@ -1,0 +1,139 @@
+---
+role: role::oradb::simple_asm
+
+profile::nfs::nfs_files:
+- /home/nfs_server_data/asm_sda_nfs_b1
+- /home/nfs_server_data/asm_sda_nfs_b2
+- /home/nfs_server_data/asm_sda_nfs_b3
+- /home/nfs_server_data/asm_sda_nfs_b4
+profile::nfs::nfs_mountpoint:                                             /nfs_client
+profile::nfs::nfs_export:                                                 /home/nfs_server_data
+
+
+# ------------------------------------------------------------------------------
+#
+#  Class overrides and additions
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::before_asm_storage:                                profile::nfs
+# ora_profile::database::db_definition:                                     ora_profile::database::db_definition_template
+ora_profile::database::fact_caching::enabled:                             false
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::dbname:                                            DB230
+ora_profile::database::version:                                           23.0.0.0
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::asm_storage
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::asm_storage::storage_type:                         nfs
+ora_profile::database::asm_storage::nfs_files:
+- /home/nfs_server_data/asm_sda_nfs_b1
+- /home/nfs_server_data/asm_sda_nfs_b2
+- /home/nfs_server_data/asm_sda_nfs_b3
+- /home/nfs_server_data/asm_sda_nfs_b4
+ora_profile::database::asm_storage::nfs_mountpoint:                       /nfs_client
+ora_profile::database::asm_storage::nfs_export:                           /home/nfs_server_data
+ora_profile::database::asm_storage::nfs_server:                           "%{facts.networking.fqdn}"
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::asm_patches
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::asm_patches::patch_file:                           p6880880_230000_Linux-x86-64-%{lookup('ora_profile::database::db_patches::opversion')}
+ora_profile::database::asm_patches::level:                                NONE
+ora_profile::database::asm_patches::opversion:                            12.2.0.1.46
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::asm_software
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::asm_software::version:                             "%{lookup('ora_profile::database::version')}"
+ora_profile::database::asm_software::disk_discovery_string:               '/nfs_client/asm*'
+ora_profile::database::asm_software::asm_disks:                           '/nfs_client/asm_sda_nfs_b1,/nfs_client/asm_sda_nfs_b2'
+ora_profile::database::asm_software::disks_failgroup_names:               ~
+ora_profile::database::asm_software::configure_afd:                       false
+ora_profile::database::asm_software::install_task:                        EXTRACT
+ora_profile::database::asm_software::file_name:                           LINUX.X64_235000_forEngineeredSystems_grid_home
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::asm_diskgroup
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::asm_diskgroup::disks:
+  DATA:
+    disks:
+    - diskname: 'DATA_0000'
+      path: '/nfs_client/asm_sda_nfs_b1'
+    - diskname: 'DATA_0001'
+      path: '/nfs_client/asm_sda_nfs_b2'
+  RECO:
+    disks:
+    - diskname: 'RECO_0000'
+      path: '/nfs_client/asm_sda_nfs_b3'
+    - diskname: 'RECO_0001'
+      path: '/nfs_client/asm_sda_nfs_b4'
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::db_software
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::db_software::file_name:                            LINUX.X64_235000_forEngineeredSystems_db_home
+# ora_profile::database::db_software::oracle_home:
+#   23aiDEFAULT_HOME:
+#     version:     23.0.0.0
+#     file:        p37703495_230000_Linux-x86-64
+#     oracle_home: /u01/app/oracle/product/23.0.0.0/db_home2
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::db_patches
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::db_patches::patch_file:                            p6880880_230000_Linux-x86-64-%{lookup('ora_profile::database::db_patches::opversion')}
+ora_profile::database::db_patches::level:                                 NONE
+ora_profile::database::db_patches::opversion:                             12.2.0.1.46
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::db_definition
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::db_definition::data_file_destination:              +DATA
+ora_profile::database::db_definition::db_recovery_file_dest:              +DATA
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::rman_config
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::rman_config::settings:
+  DB230:
+    archivelog_backup_copies:
+      DISK: '1'
+    backup_optimization: 'ON'
+    controlfile_autobackup: 'ON'
+    controlfile_autobackup_format:
+      DISK: '+RECO/DB230/%F'
+    device:
+      DISK: 'PARALLELISM 2 BACKUP TYPE TO COMPRESSED BACKUPSET'
+    compression_algorithm: "'ZSTD' AS OF RELEASE 'DEFAULT' OPTIMIZE FOR LOAD FALSE"

@@ -6,7 +6,7 @@
 #
 # @example
 #   include profile::nfs
-class profile::nfs(
+class profile::nfs (
   Array[Stdlib::Absolutepath]
             $nfs_files,
   Stdlib::Absolutepath
@@ -14,37 +14,36 @@ class profile::nfs(
   Stdlib::Absolutepath
             $nfs_export,
 ) inherits ora_profile::database {
-
   file { $nfs_export:
     ensure  => directory,
     recurse => false,
     replace => false,
     mode    => '0775',
     owner   => $grid_user,
-    group   => $grid_admingroup,
+    group   => 'asmdba',
   }
 
   $nfs_files.each |$file| {
     exec { "/bin/dd if=/dev/zero of=${file} bs=1 count=0 seek=7520M":
-      user      => $grid_user,
-      group     => $grid_admingroup,
+      user      => $ora_profile::database::grid_user,
+      group     => 'asmdba',
       logoutput => true,
       unless    => "/usr/bin/test -f ${file}",
     }
 
     -> file { $file:
-      ensure => present,
-      owner  => $grid_user,
-      group  => $grid_admingroup,
+      ensure => file,
+      owner  => $ora_profile::database::grid_user,
+      group  => 'asmdba',
       mode   => '0664',
     }
   }
 
-  contain ::nfs
+  contain nfs
 
-  nfs::server::export{ $nfs_export:
+  nfs::server::export { $nfs_export:
     ensure      => 'mounted',
     options_nfs => 'rw sync no_wdelay insecure_locks no_root_squash',
-    clients     => "${facts['fqdn']}(rw,insecure,async,no_root_squash) localhost(rw)",
+    clients     => "${facts['networking']['fqdn']}(rw,insecure,async,no_root_squash) localhost(rw)",
   }
 }
