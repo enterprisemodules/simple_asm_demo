@@ -6,11 +6,26 @@ include:
   - project: 'enterprisemodules/gitlab_ci'
     file: 'gitlab-ci.yml'
 
+# asm230_demo_check:
+#   extends: .demo_check
+#   variables:
+#     server: ml-asm230
+#   before_script:
+#     - vboxmanage controlvm ml-asm230 poweroff 2>/dev/null || true
+#     - vboxmanage unregistervm ml-asm230 --delete-all 2>/dev/null || true
+#     - rm -rf /home/gitlab-runner/VirtualBox\ VMs/ml-asm230
+#     - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > .netrc
+#     - if [ "$USE_LATEST_MODULES" == "yes" ]; then touch ./use_latest_modules ; fi
+#     - vagrant prepare $server
+
 asm210_demo_check:
   extends: .demo_check
   variables:
     server: ml-asm210
   before_script:
+    - vboxmanage controlvm ml-asm210 poweroff 2>/dev/null || true
+    - vboxmanage unregistervm ml-asm210 --delete-all 2>/dev/null || true
+    - rm -rf /home/gitlab-runner/VirtualBox\ VMs/ml-asm210
     - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > .netrc
     - if [ "$USE_LATEST_MODULES" == "yes" ]; then touch ./use_latest_modules ; fi
     - vagrant prepare $server
@@ -20,27 +35,30 @@ asm190_demo_check:
   variables:
     server: ml-asm190
   before_script:
+    - vboxmanage controlvm ml-asm190 poweroff 2>/dev/null || true
+    - vboxmanage unregistervm ml-asm190 --delete-all 2>/dev/null || true
+    - rm -rf /home/gitlab-runner/VirtualBox\ VMs/ml-asm190
     - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > .netrc
     - if [ "$USE_LATEST_MODULES" == "yes" ]; then touch ./use_latest_modules ; fi
     - vagrant prepare $server
 
-asm180_demo_check:
-  extends: .demo_check
-  variables:
-    server: ml-asm180
-  before_script:
-    - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > .netrc
-    - if [ "$USE_LATEST_MODULES" == "yes" ]; then touch ./use_latest_modules ; fi
-    - vagrant prepare $server
+# asm180_demo_check:
+#   extends: .demo_check
+#   variables:
+#     server: ml-asm180
+#   before_script:
+#     - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > .netrc
+#     - if [ "$USE_LATEST_MODULES" == "yes" ]; then touch ./use_latest_modules ; fi
+#     - vagrant prepare $server
 
-asm122_demo_check:
-  extends: .demo_check
-  variables:
-    server: ml-asm122
-  before_script:
-    - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > .netrc
-    - if [ "$USE_LATEST_MODULES" == "yes" ]; then touch ./use_latest_modules ; fi
-    - vagrant prepare $server
+# asm122_demo_check:
+#   extends: .demo_check
+#   variables:
+#     server: ml-asm122
+#   before_script:
+#     - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > .netrc
+#     - if [ "$USE_LATEST_MODULES" == "yes" ]; then touch ./use_latest_modules ; fi
+#     - vagrant prepare $server
 
 # asm121_demo_check:
 #   extends: .demo_check

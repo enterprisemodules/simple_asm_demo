@@ -2,7 +2,7 @@ mod 'puppetlabs-stdlib'
 mod 'puppetlabs-concat'
 mod 'stm-debconf'
 mod 'saz-limits'
-mod 'petems-swap_file'
+mod 'puppet-swap_file'
 mod 'puppet-archive'
 mod 'saz-timezone'
 mod 'ipcrm-echo'
@@ -22,7 +22,6 @@ mod 'enterprisemodules-ora_config'
 mod 'enterprisemodules-easy_type'
 mod 'enterprisemodules-ora_install'
 mod 'enterprisemodules-ora_profile'
-mod 'enterprisemodules-ora_secured'
 #
 # Modules that are part of the control repo. R10K doesn't need to touch these
 #

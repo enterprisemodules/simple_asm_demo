@@ -1,5 +1,5 @@
 # Docs
-class profile::oradb(
+class profile::oradb (
   Stdlib::Absolutepath $grid_base,
   Stdlib::Absolutepath $grid_home,
   String               $grid_user,
@@ -7,5 +7,5 @@ class profile::oradb(
   String               $asm_sys_password,
   Stdlib::Absolutepath $ora_inventory_dir,
   Hash                 $disk_devices = {},
-){
+) {
 }

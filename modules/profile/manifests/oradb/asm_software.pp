@@ -1,22 +1,21 @@
 # Docs
 # TODO: Write documentation
-class profile::oradb::asm_software(
+class profile::oradb::asm_software (
   String $version,
   String $file_name,
-)
-{
+) {
   include profile
   include profile::oradb
 
-  $configure_afd = lookup({name => 'profile::oradb::asm_diskgroup::configure_afd', default_value => false})
+  $configure_afd = lookup({ name => 'profile::oradb::asm_diskgroup::configure_afd', default_value => false })
 
   if ( $configure_afd ) {
     # add udev rules for devices
-    if ( $::profile::oradb::disk_devices ) {
+    if ( $profile::oradb::disk_devices ) {
       file { '/etc/udev/rules.d/99-oracle-afddevices.rules':
-        ensure  => present,
+        ensure  => file,
         content => template('profile/99-oracle-afddevices.rules.erb'),
-        require => User[$::profile::oradb::grid_user],
+        require => User[$profile::oradb::grid_user],
         notify  => Exec['apply_udev_rules'],
       }
       exec { 'apply_udev_rules':
@@ -34,21 +33,21 @@ class profile::oradb::asm_software(
     "/u01/app/grid/product/${version}",
   ]
 
-  file{ $dirs:
+  file { $dirs:
     ensure => directory,
     owner  => $profile::oradb::grid_user,
     group  => $profile::oradb::grid_group,
     mode   => '0755',
   }
 
-  file{ '/u01/app':
+  file { '/u01/app':
     ensure => directory,
     owner  => $profile::oradb::grid_user,
     group  => $profile::oradb::grid_group,
     mode   => '0775',
   }
 
-  -> ora_install::installasm{ $file_name:
+  -> ora_install::installasm { $file_name:
     version                   => $version,
     file                      => $file_name,
     grid_base                 => $profile::oradb::grid_base,
@@ -79,7 +78,7 @@ class profile::oradb::asm_software(
     user                      => $profile::oradb::grid_user,
   }
 
-  -> ora_setting{ '+ASM':
+  -> ora_setting { '+ASM':
     default     => false,
     user        => 'sys',
     syspriv     => 'sysasm',
@@ -87,9 +86,8 @@ class profile::oradb::asm_software(
     os_user     => $profile::oradb::grid_user,
   }
 
-  -> file_line{ 'add_asm_to_oratab':
+  -> file_line { 'add_asm_to_oratab':
     path => '/etc/oratab',
     line => "+ASM:${profile::oradb::grid_home}:N",
   }
-
 }
