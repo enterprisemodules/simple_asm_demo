@@ -6,15 +6,11 @@
 #
 # @example
 #   include profile::nfs
-class profile::nfs(
-  Array[Stdlib::Absolutepath]
-            $nfs_files,
-  Stdlib::Absolutepath
-            $nfs_mountpoint,
-  Stdlib::Absolutepath
-            $nfs_export,
+class profile::nfs (
+  Array[Stdlib::Absolutepath] $nfs_files,
+  Stdlib::Absolutepath        $nfs_mountpoint,
+  Stdlib::Absolutepath        $nfs_export,
 ) inherits ora_profile::database {
-
   file { $nfs_export:
     ensure  => directory,
     recurse => false,
@@ -33,18 +29,18 @@ class profile::nfs(
     }
 
     -> file { $file:
-      ensure => present,
+      ensure => file,
       owner  => $grid_user,
       group  => $grid_admingroup,
       mode   => '0664',
     }
   }
 
-  contain ::nfs
+  contain nfs
 
-  nfs::server::export{ $nfs_export:
+  nfs::server::export { $nfs_export:
     ensure      => 'mounted',
     options_nfs => 'rw sync no_wdelay insecure_locks no_root_squash',
-    clients     => "${facts['fqdn']}(rw,insecure,async,no_root_squash) localhost(rw)",
+    clients     => "${facts['networking']['fqdn']}(rw,insecure,async,no_root_squash) localhost(rw)",
   }
 }
