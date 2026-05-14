@@ -1,0 +1,141 @@
+---
+role: role::oradb::simple_asm
+
+profile::nfs::nfs_files:
+- /home/nfs_server_data/asm_sda_nfs_b1
+- /home/nfs_server_data/asm_sda_nfs_b2
+- /home/nfs_server_data/asm_sda_nfs_b3
+- /home/nfs_server_data/asm_sda_nfs_b4
+profile::nfs::nfs_mountpoint:                                             /nfs_client
+profile::nfs::nfs_export:                                                 /home/nfs_server_data
+
+
+# ------------------------------------------------------------------------------
+#
+#  Class overrides and additions
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::before_asm_storage:                                profile::nfs
+#
+# IMPORTANT: do NOT switch this node to db_definition_template for 26ai.
+# The 26ai binary (LINUX.X64_2326100_db_home, RU 23.26.10) is internally
+# 23.4.0.0.0, but the seed datafile bundle it ships
+# (${ORACLE_HOME}/assistants/dbca/templates/Seed_Database.dfb) is stamped
+# 23.6.0.0.0. Restoring the seed under a 23.4 binary fails with
+#   ORA-00201: control file version 23.6.0.0.0 incompatible with ORACLE
+#   version 23.4.0.0.0
+# The default `db_definition` class creates the database from scratch via
+# SQL (no seed restore), which sidesteps the mismatch. The sibling
+# simple_db_demo's 26ai node uses the same approach and works.
+#
+# Oracle 26 ships with the latest RU bundled in the grid/db home, so the
+# separate asm_patches / db_patches steps are skipped by default.
+#
+ora_profile::database::asm_patches:                                       skip
+ora_profile::database::db_patches:                                        skip
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::dbname:                                            DB260
+ora_profile::database::version:                                           26.0.0.0
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::db_definition
+#
+# Override the filesystem-path defaults (`/u02/oradata`, `/u03/fast_recovery_area`)
+# to ASM diskgroup paths so CREATE DATABASE writes to ASM.
+# ------------------------------------------------------------------------------
+ora_profile::database::db_definition::data_file_destination:              '+DATA'
+ora_profile::database::db_definition::db_recovery_file_dest:              '+RECO'
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::asm_storage
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::asm_storage::storage_type:                         nfs
+ora_profile::database::asm_storage::nfs_files:
+- /home/nfs_server_data/asm_sda_nfs_b1
+- /home/nfs_server_data/asm_sda_nfs_b2
+- /home/nfs_server_data/asm_sda_nfs_b3
+- /home/nfs_server_data/asm_sda_nfs_b4
+ora_profile::database::asm_storage::nfs_mountpoint:                       /nfs_client
+ora_profile::database::asm_storage::nfs_export:                           /home/nfs_server_data
+ora_profile::database::asm_storage::nfs_server:                           "%{facts.networking.fqdn}"
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::asm_software
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::asm_software::version:                             "%{lookup('ora_profile::database::version')}"
+ora_profile::database::asm_software::file:                                LINUX.X64_2326100_grid_home.zip
+ora_profile::database::asm_software::disk_discovery_string:               '/nfs_client/asm*'
+ora_profile::database::asm_software::asm_disks:                           '/nfs_client/asm_sda_nfs_b1,/nfs_client/asm_sda_nfs_b2'
+ora_profile::database::asm_software::disks_failgroup_names:               ~
+ora_profile::database::asm_software::configure_afd:                       false
+ora_profile::database::asm_software::install_task:                        EXTRACT
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::db_software
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::db_software::file:                                 LINUX.X64_2326100_db_home.zip
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::asm_diskgroup
+#
+# ------------------------------------------------------------------------------
+#
+# The 26ai grid binary is the 23.x line (RU 23.26.10). ASM rejects
+# "26.0.0.0" for compatible.asm / compatible.rdbms (ORA-15238/ORA-15243).
+# Pin both to the 5-element 23 form, matching what gridSetup itself sets
+# at install time, so puppet does not try to "upgrade" the attribute.
+#
+ora_profile::database::asm_diskgroup::disks:
+  DATA:
+    compat_asm:   '23.0.0.0.0'
+    compat_rdbms: '23.0.0.0.0'
+    disks:
+    - diskname: 'DATA_0000'
+      path: '/nfs_client/asm_sda_nfs_b1'
+    - diskname: 'DATA_0001'
+      path: '/nfs_client/asm_sda_nfs_b2'
+  RECO:
+    compat_asm:   '23.0.0.0.0'
+    compat_rdbms: '23.0.0.0.0'
+    disks:
+    - diskname: 'RECO_0000'
+      path: '/nfs_client/asm_sda_nfs_b3'
+    - diskname: 'RECO_0001'
+      path: '/nfs_client/asm_sda_nfs_b4'
+
+
+# ------------------------------------------------------------------------------
+#
+#  Settings for database::rman_config
+#
+# ------------------------------------------------------------------------------
+ora_profile::database::rman_config::settings:
+  DB260:
+    archivelog_backup_copies:
+      DISK: '1'
+    backup_optimization: 'ON'
+    controlfile_autobackup: 'ON'
+    controlfile_autobackup_format:
+      DISK: '+RECO/DB260/%F'
+    device:
+      DISK: 'PARALLELISM 2 BACKUP TYPE TO COMPRESSED BACKUPSET'
+    compression_algorithm: "'ZSTD' AS OF RELEASE 'DEFAULT' OPTIMIZE FOR LOAD FALSE"

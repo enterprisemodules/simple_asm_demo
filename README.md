@@ -11,7 +11,7 @@ The name of the node indicates which version of Oracle will be installed in it i
 All nodes are available to test with Puppet masterless. To do so, add `ml-` for the name when using vagrant:
 
 ```bash
-vagrant up <ml-asm112|ml-asm121|ml-asm122|ml-asm180|ml-asm190|ml-asm210>
+vagrant up <ml-asm112|ml-asm121|ml-asm122|ml-asm180|ml-asm190|ml-asm210|ml-asm260>
 ```
 
 ## Staring the nodes with PE
@@ -20,7 +20,7 @@ You can also test with a Puppet Enterprise server. To do so, add `pe-` for the n
 
 ```bash
 vagrant up pe-asmmaster
-vagrant up <pe-asm112|pe-asm121|pe-asm122|pe-asm180|pe-asm190|pe-asm210>
+vagrant up <pe-asm112|pe-asm121|pe-asm122|pe-asm180|pe-asm190|pe-asm210|pe-asm260>
 ```
 
 ## ordering
@@ -28,7 +28,7 @@ vagrant up <pe-asm112|pe-asm121|pe-asm122|pe-asm180|pe-asm190|pe-asm210>
 You must always use the specified order:
 
 1. asmmaster
-2. <asm112|asm121|asm122|asm180|asm190|asm210>
+2. <asm112|asm121|asm122|asm180|asm190|asm210|asm260>
 
 ## Required software
 
@@ -42,6 +42,11 @@ Make sure to also rename the zipfile when using this demo.
 ### Puppet Enterprise (Not needed when using masterless deployments)
 
 - [puppet-enterprise-2021.5.0-el-8-x86_64.tar.gz (Extracted tar)](https://puppet.com/download-puppet-enterprise)
+
+### Oracle Database version 26.0.0.0
+
+- `LINUX.X64_2326100_grid_home.zip`               (26 grid home, RU 26.10 bundled)
+- `LINUX.X64_2326100_db_home.zip`                 (26 oracle home, RU 26.10 bundled)
 
 ### Oracle Database version 21.0.0.0
 

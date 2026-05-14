@@ -12,7 +12,7 @@ defaults:
   dhcp_fix:         false
   needs_storage:    false
   virtualboxorafix: false
-
+  run_r10k:         false
 #
 # The settings for the Puppet Enterprise Server
 #
@@ -85,4 +85,13 @@ asm210:
   - LINUX.X64_213000_db_home.zip
   - p6880880_190000_Linux-x86-64-12.2.0.1.33.zip    # OPatch upgrade version 12.2.0.1.33
   - p34526142_210000_Linux-x86-64.zip               # 21c OCT2022RU
+
+asm260:
+  # Oracle AI Database 26ai is supported on OL9 / RHEL 9 / SLES 15 only.
+  # OL7's glibc-libcrypt does not provide the XCRYPT_2.0 symbol that the
+  # 26ai-bundled perl is linked against — no RPM on OL7 can fix this.
+  box:              enterprisemodules/ol-9.0-x86_64-nocm
+  software_files:
+  - LINUX.X64_2326100_grid_home.zip                 # Oracle 26 grid home (RU bundled)
+  - LINUX.X64_2326100_db_home.zip                   # Oracle 26 oracle home (RU bundled)
 
