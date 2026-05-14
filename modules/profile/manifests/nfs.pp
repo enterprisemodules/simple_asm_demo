@@ -23,7 +23,7 @@ class profile::nfs (
   $nfs_files.each |$file| {
     exec { "/bin/dd if=/dev/zero of=${file} bs=1 count=0 seek=7520M":
       user      => $grid_user,
-      group     => $grid_admingroup,
+      group     => $install_group,
       logoutput => true,
       unless    => "/usr/bin/test -f ${file}",
     }
@@ -31,8 +31,8 @@ class profile::nfs (
     -> file { $file:
       ensure => file,
       owner  => $grid_user,
-      group  => $grid_admingroup,
-      mode   => '0664',
+      group  => $install_group,
+      mode   => '0660',
     }
   }
 
